@@ -1,0 +1,84 @@
+HShopProperty:
+    type: entity
+    table: h_shop_property
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        editType:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: edit_type
+        groupCode:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: group_code
+        hasThumb:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: has_thumb
+        industryId:
+            type: integer
+            nullable: true
+            unsigned: false
+            default: '0'
+            column: industry_id
+        isColorProp:
+            type: boolean
+            nullable: true
+            column: is_color_prop
+        isCommonIndustry:
+            type: boolean
+            nullable: true
+            column: is_common_industry
+        isSaleProp:
+            type: boolean
+            nullable: true
+            column: is_sale_prop
+        status:
+            type: integer
+            nullable: true
+            unsigned: false
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        name:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        required:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        searchable:
+            type: boolean
+            nullable: true
+        sequence:
+            type: integer
+            nullable: true
+            unsigned: false
+        valueType:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: value_type
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

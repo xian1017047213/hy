@@ -1,0 +1,160 @@
+.leftscroll img {
+	width: 100%;
+}
+
+.leftscroll {
+	
+}
+
+.leftscroll ul {
+	overflow: hidden;
+}
+
+.leftscroll ul li {
+	float: left;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.leftscroll ul li div {
+	
+}
+
+.leftscroll a,img {
+	display: block;
+	outline: none;
+	-moz-outline:none;
+	border-style: none;
+}
+
+.kvbutton {
+	width: 100%;
+	text-align: center;
+}
+
+.kvbutton ul {
+	display: block;
+	width: 600px;
+	margin: 0 auto;
+}
+
+.kvbutton ul li {
+	display: block;
+	width: 300px;
+	float: left;
+	height: 5px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.b-c-o {
+	background-color: #E1B928;
+}
+
+.b-c-c {
+	background-color: #e0e0e0;
+}
+
+.kvbutton label {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	width: 300px;
+	height: 3px;
+	font-size: 0;
+	cursor: pointer;
+}
+
+.c-m-1 {
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+}
+
+.c-m-1 h4 {
+	font-size: 25px;
+	color: #666;
+}
+
+.c-m-1 h3 {
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.c-m-2 {
+	clear: both;
+	width: 1000px;
+	height: 340px;
+	margin: auto;
+	border: #e6e6e6 solid 1px;
+	margin-bottom: 10px;
+	box-shadow: #CCC 1px 1px 6px;
+	border-radius: 5px 5px 0px 0px;
+}
+.c-m-2 ul {
+	list-style: none;
+	
+}
+.c-m-2 li {
+	border: 1px solid #EEE;
+	width: 300px;
+	float: left;
+	margin: 20px 15px 0px 15px;
+}
+/*
+.c-m-2 li:HOVER{
+	border: 2px solid #28A7E1;
+	color: #28A7E1;
+}*/
+.c-m-d{
+	height: 300px;
+	overflow: hidden;
+}
+.c-m-up{
+	height: 300px;
+}
+.c-m-down{
+	height: 300px;
+	position: relative;
+}
+.c-m-u-1-b{
+	background: #ffffff;
+}
+.c-m-d-1-b{
+	background: #ffffff;
+}
+.c-m-d-1-b:hover{
+	-moz-box-shadow:0px 0px 8px #ccc inset;
+	-webkit-box-shadow:0px 0px 8px #ccc inset;
+	box-shadow:0px 0px 8px #ccc inset;
+}
+.c-m-d a{
+	width: 280px;
+	display:block;
+	font-weight: bold;
+}
+.c-m-d span,p,a,img{
+	text-align:center;
+	margin: auto;
+	color: #444;
+}
+.c-m-d img{
+	padding-top: 10px;
+}
+.c-m-d p{
+	padding-top: 10px;
+}
+.c-m-t{
+	list-style: none;
+	border-top: 1px solid #EEE;
+	position: relative;
+    bottom: -55px;
+    font-size: 30px;
+}
+.c-m-2 a:HOVER {
+	color: #28A7E1;
+}

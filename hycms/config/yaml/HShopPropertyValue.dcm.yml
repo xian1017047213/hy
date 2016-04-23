@@ -1,0 +1,38 @@
+HShopPropertyValue:
+    type: entity
+    table: h_shop_property_value
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        propertyId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: property_id
+        sequence:
+            type: integer
+            nullable: true
+            unsigned: false
+        value:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

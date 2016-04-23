@@ -1,0 +1,315 @@
+@CHARSET "UTF-8";
+
+.ui-block-content {
+	background-color: #F2F3F5;
+	padding: 12px;
+}
+
+.ui-block-content label, input, span, a, radio, option, select, button {
+	font-size: 14px;
+	padding-right: 10px;
+	color: #333;
+	font-family: "Microsoft YaHei", "Myriad Pro", "Hiragino Sans GB";
+}
+
+.ui-block-content input, select {
+	height: 32px;
+	border-radius: 0px;
+	-webkit-transition: none;
+	transition: none;
+	font-size: 12px;
+}
+
+.ui-block-content-lb td {
+	padding: 2px 0 2px 0;
+}
+
+.ui-block-content-lb span {
+	margin-right: 20px;
+}
+
+.ui-table-default {
+	display: inline;
+	width: 160px;
+	box-sizing: border-box;
+	padding: 3px;
+	outline: none;
+}
+
+.ui-block-content input:FOCUS {
+	border: 1px solid #79CCFF;
+}
+
+.button-line {
+	padding: 15px 0 0 0;
+}
+
+.button-line button:FOCUS {
+	color: #333333;
+	text-decoration: none;
+}
+
+.button-line button {
+	outline: none;
+	color: #333333;
+	font-size: 12px;
+	border-radius: 0px;
+	padding: 8px 16px;
+	height: 32px;
+	line-height: 14px;
+	border: 1px solid #dddddd;
+	background-color: #F7F7F7;
+	cursor: pointer;
+}
+
+.ui-block {
+	width: 100%;
+	float:left;
+	height: auto;
+	padding-bottom: 10px;
+	padding-top: 25px;
+}
+.ui-block-nofloat{
+	width: 100%;
+	height: auto;
+	padding-bottom: 10px;
+	padding-top: 25px;
+}
+
+.table {
+	background: #FFF;
+	font-size: 12px;
+	border-top: 1px solid #e1e6eb;
+	margin-top: 8px;
+	border: 1px solid #e1e6eb;
+	clear: both;
+	width: 100%;
+	display: block;
+}
+
+
+
+.table thead tr th {
+	padding: 8px 8px;
+	font-weight: normal;
+	color: #999;
+	background-color: #F5F6FA;
+}
+.table-list span{
+	font-size: 12px;
+	padding-right: 10px;
+	color: #333;
+	font-family: "Microsoft YaHei", "Myriad Pro", "Hiragino Sans GB";
+}
+
+.hoverback tr:HOVER {
+	background-color: #eee;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
+	.table>tbody>tr>td, .table>tfoot>tr>td {
+	padding: 8px;
+	line-height: 1.428571429;
+	vertical-align: top;
+}
+
+.table>thead>tr>th {
+	vertical-align: bottom;
+}
+
+.table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>th,
+	.table>thead:first-child>tr:first-child>th, .table>caption+thead>tr:first-child>td,
+	.table>colgroup+thead>tr:first-child>td, .table>thead:first-child>tr:first-child>td
+	{
+	border-top: 0;
+}
+
+th {
+	text-align: left;
+}
+
+.nav-pager {
+	right: 0;
+}
+
+.ui-block a {
+	text-decoration: none;
+}
+
+.pagenum {
+	width: 10px;
+	text-decoration: none;
+}
+
+.ui-poplist ul {
+	float: right;
+	position: absolute;
+	display: none;
+	list-style: none;
+	margin-top: -22px;
+	background-color: #F5F6FA;
+}
+
+.ui-poplist li {
+	padding: 5px 0 5px 0;
+}
+
+.ui-poplist-inline ul {
+	list-style: none;
+}
+
+.ui-poplist-inline li {
+	background-color: #0E87D1;
+	padding: 5px 0 5px 0;
+	display: inline-block;
+}
+
+.ui-poplist-inline a {
+	padding: 0 10px 0 10px;
+	text-decoration: none;
+	color: #fff;
+}
+
+.ui-table-nav {
+	clear: both;
+	margin: 10px 0 10px 0;
+	float: right;
+}
+
+.ui-table-title {
+	font-size: 20px;
+}
+
+.nav-pager button {
+	outline: none;
+	color: #333333;
+	font-size: 12px;
+	border-radius: 0px;
+	padding: 8px 16px;
+	height: 26px;
+	line-height: 2px;
+	border: 1px solid #dddddd;
+	background-color: #F7F7F7;
+	cursor: pointer;
+}
+
+.conright button:HOVER {
+	background-color: #ffffff;
+}
+
+.notextremind {
+	margin-left: 50%;
+	font-size: 18px;
+}
+
+.u-f-t-i>tbody>tr>td>input, select, option {
+	height: 32px;
+	border-radius: 0px;
+	-webkit-transition: none;
+	width: 400px;
+	text-indent: 10px;
+	transition: none;
+}
+
+.u-t-s {
+	display: inline;
+	width: 414px;
+	box-sizing: border-box;
+	padding: 3px;
+	outline: none;
+	height: 40px;
+}
+
+.u-f-t-i td {
+	padding: 2px 0 2px 0;
+}
+
+.u-f-t-i a {
+	text-decoration: none;
+}
+
+.u-f-t-i button {
+	outline: none;
+	color: #333333;
+	font-size: 12px;
+	border-radius: 0px;
+	padding: 8px 16px;
+	height: 32px;
+	line-height: 14px;
+	border: 1px solid #dddddd;
+	cursor: pointer;
+}
+
+.buttonsave {
+	background-color: #F7F7F7;
+}
+
+.buttonback {
+	background-color: #ddd;
+}
+
+.u-f-t-i tr {
+	height: 60px;
+}
+
+.u-f-t-i-t input, select, option {
+	border-radius: 0px;
+	-webkit-transition: none;
+	padding: 0 10px 0 10px;
+	transition: none;
+}
+
+.u-f-t-i-t-b {
+	outline: none;
+	color: #333333;
+	font-size: 12px;
+	border-radius: 0px;
+	padding: 8px 16px;
+	height: 36px;
+	line-height: 14px;
+	border: 1px solid #dddddd;
+	cursor: pointer;
+	background-color: #F7F7F7;
+}
+.ui-block-table{
+	background: #FFF;
+	float:left;
+    font-size: 12px;
+    border-top: 1px solid #e1e6eb;
+    margin-top: 8px;
+    border: 1px solid #e1e6eb;
+    clear: both;
+    width: 100%;
+    display: block;
+    padding-left: 10px;
+}
+.ui-block-line{
+	padding: 5px 0 5px 0;
+    position: relative;
+    float:left;
+    display: block;
+    clear: both;
+}
+.ui-block-line label{
+	display: inline-block;
+	width: 150px;
+	padding: 5px 0 5px 0px;
+}
+.ui-block-line-title {
+    float: left;
+    display: block;
+}
+.ui-block-line-body {
+    display: block;
+    position: relative;
+    margin-left: 158px;
+    width: 80%;
+}
+.ele-block{
+	float: left;
+	padding: 5px 0 5px 0px;
+}
+.table-input{
+	width: 350px;
+    height: 32px;
+}

@@ -1,0 +1,44 @@
+HModuleType:
+    type: entity
+    table: h_module_type
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        name:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        description:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        status:
+            type: integer
+            nullable: true
+            unsigned: false
+        isShow:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: is_show
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

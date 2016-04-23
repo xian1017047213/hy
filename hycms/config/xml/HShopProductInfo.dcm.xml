@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HShopProductInfo" table="h_shop_product_info">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activeBeginTime" type="datetime" column="active_begin_time" nullable="true"/>
+    <field name="createTime" type="datetime" column="create_time" nullable="true"/>
+    <field name="description" type="text" column="description" length="65535" nullable="true"/>
+    <field name="productId" type="integer" column="product_id" nullable="true"/>
+    <field name="language" type="string" column="language" length="255" nullable="true"/>
+    <field name="lastSelectPropertyId" type="integer" column="last_select_property_id" nullable="true"/>
+    <field name="lastSelectPropertyValue" type="integer" column="last_select_property_value" nullable="true"/>
+    <field name="listPrice" type="integer" column="list_price" nullable="true"/>
+    <field name="modifyTime" type="datetime" column="modify_time" nullable="true"/>
+    <field name="salePrice" type="integer" column="sale_price" nullable="true"/>
+    <field name="seodescription" type="text" column="seodescription" length="65535" nullable="true"/>
+    <field name="seokeywords" type="string" column="seokeywords" length="255" nullable="true"/>
+    <field name="seotitle" type="string" column="seotitle" length="255" nullable="true"/>
+    <field name="sketch" type="string" column="sketch" length="255" nullable="true"/>
+    <field name="style" type="string" column="style" length="255" nullable="true"/>
+    <field name="subTitle" type="string" column="sub_title" length="500" nullable="true"/>
+    <field name="title" type="string" column="title" length="500" nullable="true"/>
+    <field name="type" type="integer" column="type" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="true"/>
+  </entity>
+</doctrine-mapping>

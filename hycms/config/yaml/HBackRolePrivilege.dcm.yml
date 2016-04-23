@@ -1,0 +1,26 @@
+HBackRolePrivilege:
+    type: entity
+    table: h_back_role_privilege
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        privilegeId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: privilege_id
+        roleId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: role_id
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

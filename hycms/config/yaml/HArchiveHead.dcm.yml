@@ -1,0 +1,155 @@
+HArchiveHead:
+    type: entity
+    table: h_archive_head
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        type:
+            type: integer
+            nullable: true
+            unsigned: false
+        sortank:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        flag:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        ismake:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        channel:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        title:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        subtitle:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        tag:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        arcrank:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        click:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        money:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        color:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        writer:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        source:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        litpic:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        senddate:
+            type: datetime
+            nullable: true
+        mid:
+            type: integer
+            nullable: true
+            unsigned: false
+        keywords:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        lastports:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        scores:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        goodpost:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        badpost:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        voteid:
+            type: integer
+            nullable: true
+            unsigned: false
+        notpost:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        description:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        filename:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        dutyadmin:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        trackid:
+            type: integer
+            nullable: true
+            unsigned: false
+        mtype:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        vesion:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

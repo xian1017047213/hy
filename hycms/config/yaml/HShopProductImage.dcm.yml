@@ -1,0 +1,66 @@
+HShopProductImage:
+    type: entity
+    table: h_shop_product_image
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        description:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+        itemId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: item_id
+        itemProperties:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+            column: item_properties
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        picUrl:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+            column: pic_url
+        position:
+            type: integer
+            nullable: true
+            unsigned: false
+        propertyId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: property_id
+        propertyValueId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: property_value_id
+        imgType:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: img_type
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

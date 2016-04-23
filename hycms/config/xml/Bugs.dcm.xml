@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Bugs" table="bugs">
+    <indexes>
+      <index name="IDX_1E197C9F8D8CDF1" columns="engineer_id"/>
+      <index name="IDX_1E197C9E1CFE6F5" columns="reporter_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="description" type="string" column="description" length="255" nullable="false"/>
+    <field name="created" type="datetime" column="created" nullable="false"/>
+    <field name="status" type="string" column="status" length="255" nullable="false"/>
+    <many-to-one field="reporter" target-entity="Users">
+      <join-columns>
+        <join-column name="reporter_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="engineer" target-entity="Users">
+      <join-columns>
+        <join-column name="engineer_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="product" target-entity="Products" inversed-by="bug">
+      <join-table name="bug_product">
+        <join-columns>
+          <join-column name="bug_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="product_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

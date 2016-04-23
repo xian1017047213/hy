@@ -1,0 +1,53 @@
+HBackMenu:
+    type: entity
+    table: h_back_menu
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        icon:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        level:
+            type: integer
+            nullable: true
+            unsigned: false
+        name:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        parentId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: parent_id
+        status:
+            type: integer
+            nullable: true
+            unsigned: false
+        sequence:
+            type: integer
+            nullable: true
+            unsigned: false
+        url:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

@@ -1,0 +1,43 @@
+HShopProductCategory:
+    type: entity
+    table: h_shop_product_category
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        categoryId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: category_id
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        isDefault:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: is_default
+        productId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: product_id
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        sequence:
+            type: integer
+            nullable: true
+            unsigned: false
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

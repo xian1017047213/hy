@@ -1,0 +1,80 @@
+HBackUser:
+    type: entity
+    table: h_back_user
+    uniqueConstraints:
+        user_name:
+            columns:
+                - user_name
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: false
+            default: '0000-00-00 00:00:00'
+            column: create_time
+        lastLoginTime:
+            type: datetime
+            nullable: false
+            column: last_login_time
+        loginIp:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: login_ip
+        phoneNum:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: phone_num
+        userName:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: user_name
+        userPwd:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: user_pwd
+        userEmail:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: user_email
+        uname:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        status:
+            type: integer
+            nullable: true
+            unsigned: false
+        tname:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        type:
+            type: string
+            nullable: true
+            length: 30
+            fixed: true
+            default: '0'
+        version:
+            type: datetime
+            nullable: false
+            default: '0000-00-00 00:00:00'
+    lifecycleCallbacks: {  }

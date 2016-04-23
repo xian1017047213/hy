@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HBackUser" table="h_back_user">
+    <unique-constraints>
+      <unique-constraint name="user_name" columns="user_name"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="false"/>
+    <field name="lastLoginTime" type="datetime" column="last_login_time" nullable="false"/>
+    <field name="loginIp" type="string" column="login_ip" length="255" nullable="true"/>
+    <field name="phoneNum" type="string" column="phone_num" length="255" nullable="true"/>
+    <field name="userName" type="string" column="user_name" length="255" nullable="false"/>
+    <field name="userPwd" type="string" column="user_pwd" length="255" nullable="false"/>
+    <field name="userEmail" type="string" column="user_email" length="255" nullable="true"/>
+    <field name="uname" type="string" column="uname" length="255" nullable="true"/>
+    <field name="tname" type="string" column="tname" length="255" nullable="true"/>
+    <field name="type" type="string" column="type" length="30" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="false"/>
+  </entity>
+</doctrine-mapping>

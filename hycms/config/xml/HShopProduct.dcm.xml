@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HShopProduct" table="h_shop_product">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" length="255" nullable="true"/>
+    <field name="createTime" type="datetime" column="create_time" nullable="true"/>
+    <field name="delistTime" type="datetime" column="delist_time" nullable="true"/>
+    <field name="industryId" type="integer" column="industry_id" nullable="true"/>
+    <field name="isaddtag" type="integer" column="isaddtag" nullable="true"/>
+    <field name="isaddcategory" type="integer" column="isaddcategory" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="listTime" type="datetime" column="list_time" nullable="true"/>
+    <field name="modifyTime" type="datetime" column="modify_time" nullable="true"/>
+    <field name="picUrl" type="string" column="pic_url" length="600" nullable="true"/>
+    <field name="shopId" type="integer" column="shop_id" nullable="true"/>
+    <field name="templateId" type="integer" column="template_id" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="true"/>
+  </entity>
+</doctrine-mapping>

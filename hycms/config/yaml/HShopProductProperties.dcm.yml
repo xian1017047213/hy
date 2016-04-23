@@ -1,0 +1,51 @@
+HShopProductProperties:
+    type: entity
+    table: h_shop_product_properties
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        productId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: product_id
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        picUrl:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+            column: pic_url
+        propertyId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: property_id
+        propertyValue:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+            column: property_value
+        propertyValueId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: property_value_id
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

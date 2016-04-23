@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HShopProperty" table="h_shop_property">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="true"/>
+    <field name="editType" type="integer" column="edit_type" nullable="true"/>
+    <field name="groupCode" type="string" column="group_code" length="255" nullable="true"/>
+    <field name="hasThumb" type="integer" column="has_thumb" nullable="true"/>
+    <field name="industryId" type="integer" column="industry_id" nullable="true"/>
+    <field name="isColorProp" type="boolean" column="is_color_prop" nullable="true"/>
+    <field name="isCommonIndustry" type="boolean" column="is_common_industry" nullable="true"/>
+    <field name="isSaleProp" type="boolean" column="is_sale_prop" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="modifyTime" type="datetime" column="modify_time" nullable="true"/>
+    <field name="name" type="string" column="name" length="255" nullable="true"/>
+    <field name="required" type="string" column="required" length="255" nullable="true"/>
+    <field name="searchable" type="boolean" column="searchable" nullable="true"/>
+    <field name="sequence" type="integer" column="sequence" nullable="true"/>
+    <field name="valueType" type="integer" column="value_type" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="true"/>
+  </entity>
+</doctrine-mapping>

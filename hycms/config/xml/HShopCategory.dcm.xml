@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HShopCategory" table="h_shop_category">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" length="255" nullable="true"/>
+    <field name="createTime" type="datetime" column="create_time" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="modifyTime" type="datetime" column="modify_time" nullable="true"/>
+    <field name="name" type="string" column="name" length="255" nullable="true"/>
+    <field name="parentId" type="integer" column="parent_id" nullable="true"/>
+    <field name="sequence" type="integer" column="sequence" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="true"/>
+  </entity>
+</doctrine-mapping>

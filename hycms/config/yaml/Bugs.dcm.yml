@@ -1,0 +1,69 @@
+Bugs:
+    type: entity
+    table: bugs
+    indexes:
+        IDX_1E197C9F8D8CDF1:
+            columns:
+                - engineer_id
+        IDX_1E197C9E1CFE6F5:
+            columns:
+                - reporter_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        description:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        created:
+            type: datetime
+            nullable: false
+        status:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        reporter:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                reporter_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        engineer:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                engineer_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        product:
+            targetEntity: Products
+            cascade: {  }
+            mappedBy: null
+            inversedBy: bug
+            joinTable:
+                name: bug_product
+                joinColumns:
+                    -
+                        name: bug_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: product_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

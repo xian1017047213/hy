@@ -1,0 +1,103 @@
+HShopProductInfo:
+    type: entity
+    table: h_shop_product_info
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        activeBeginTime:
+            type: datetime
+            nullable: true
+            column: active_begin_time
+        createTime:
+            type: datetime
+            nullable: true
+            column: create_time
+        description:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+        productId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: product_id
+        language:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        lastSelectPropertyId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: last_select_property_id
+        lastSelectPropertyValue:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: last_select_property_value
+        listPrice:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: list_price
+        modifyTime:
+            type: datetime
+            nullable: true
+            column: modify_time
+        salePrice:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: sale_price
+        seodescription:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+        seokeywords:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        seotitle:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        sketch:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        style:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        subTitle:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+            column: sub_title
+        title:
+            type: string
+            nullable: true
+            length: 500
+            fixed: false
+        type:
+            type: integer
+            nullable: true
+            unsigned: false
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

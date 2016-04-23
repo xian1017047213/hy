@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HShopProductImage" table="h_shop_product_image">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="true"/>
+    <field name="description" type="text" column="description" length="65535" nullable="true"/>
+    <field name="itemId" type="integer" column="item_id" nullable="true"/>
+    <field name="itemProperties" type="string" column="item_properties" length="500" nullable="true"/>
+    <field name="modifyTime" type="datetime" column="modify_time" nullable="true"/>
+    <field name="picUrl" type="string" column="pic_url" length="500" nullable="true"/>
+    <field name="position" type="integer" column="position" nullable="true"/>
+    <field name="propertyId" type="integer" column="property_id" nullable="true"/>
+    <field name="propertyValueId" type="integer" column="property_value_id" nullable="true"/>
+    <field name="imgType" type="string" column="img_type" length="255" nullable="true"/>
+    <field name="version" type="datetime" column="version" nullable="true"/>
+  </entity>
+</doctrine-mapping>

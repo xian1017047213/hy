@@ -1,0 +1,31 @@
+HBackUserRole:
+    type: entity
+    table: h_back_user_role
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        orgId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: org_id
+        roleId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: role_id
+        userId:
+            type: integer
+            nullable: true
+            unsigned: false
+            column: user_id
+        version:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

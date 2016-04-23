@@ -1,0 +1,58 @@
+.leftscroll img{
+	width: 100%;
+}
+.leftscroll{
+	
+}
+.leftscroll ul {
+	overflow: hidden;
+}
+
+.leftscroll ul li{
+	float: left;
+	overflow: hidden;
+	display:block;
+	position: relative;
+/* 	background: #000; */
+}
+.leftscroll ul li div {
+	
+}
+.leftscroll a,img{
+	display: block;
+}
+.kvbutton {
+    width: 100%;
+    text-align: center;
+}
+.kvbutton ul{
+	display: block;
+	width: 600px;
+	margin: 0 auto;
+}
+.kvbutton ul li{
+	display: block;
+	width: 300px;
+	float: left;
+	height: 5px;
+	cursor: pointer;
+	overflow: hidden;
+}
+.b-c-o{
+	background-color: #E1B928;
+}
+.b-c-c{
+	background-color: #e0e0e0;
+}
+.kvbutton label
+ {
+    display: block;
+    margin: 0;
+    padding:0;
+    border:0;
+    overflow: hidden;
+    width: 300px;
+    height: 3px;
+    font-size: 0;
+    cursor: pointer;
+}

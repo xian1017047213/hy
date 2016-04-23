@@ -1,0 +1,50 @@
+div,a,ul,li,span,body{
+/* 	overflow-y:hidden; */
+	text-decoration: none;
+	font-family: 'Open Sans','Microsoft YaHei',"Heiti SC",'STHeiti Light','PMingLiU', sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.header{
+	height: 100px;
+}
+.headercon{
+	width: 1000px;
+	margin: 0 auto;
+}
+.headercon a{
+	text-align: center;
+}
+.logo{
+	float:left;
+	padding-top: 20px;
+}
+.logo a img{
+	border: 0;
+}
+.navlist{
+	float:right;
+	display: inline-block;
+}
+.navlist ul{
+	margin-top:65px;
+	display: inline-block;
+	list-style-type: none;
+	white-space: nowrap;
+}
+.navlist ul li{
+	cursor:pointer;
+	padding-left:30px;
+	padding-right:30px;
+	clear:both;
+	display: inline-block;
+	border-bottom:3px solid #fff;
+}
+.navlist ul li a,a:VISITED{
+	color:#777;
+}
+.navlist ul li:HOVER{
+	border-bottom:3px solid #28A7E1;
+	
+}

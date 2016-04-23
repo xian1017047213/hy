@@ -1,0 +1,33 @@
+HBackRole:
+    type: entity
+    table: h_back_role
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        description:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        roleName:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: role_name
+        status:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        version:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }

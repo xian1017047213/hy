@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+body,p,li,ul,span,label,a,button,input {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	font-family:"Microsoft YaHei","Myriad Pro", "Hiragino Sans GB";
+}
+
+body {
+	padding-top: 100px;
+	background-color: #0094EA;
+}
+
+.content {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.c-t {
+	margin: 0 auto;
+	width: 750px;
+}
+
+.c-t p {
+	color: #ffffff;
+	font-size: 25px;
+	text-align: center;
+}
+
+.c-t-t {
+	text-indent: 41px;
+	letter-spacing: 52px;
+}
+
+.c-t-b {
+	top: 30px;
+    position: relative;
+	width: 755px;
+	height: 273px;
+	margin: 0 auto;
+	background: url("../backimages/loginback.jpg") no-repeat;
+	box-shadow: 0 0 3px 1px #5DC09B;
+}
+
+.c-t-b-r {
+	height: 243px;
+	color: #444;
+	width: 310px;
+	opacity: 0.8;
+	position:absolute;
+	right:0;
+	display: block;
+	background-color: #ffffff;
+	margin-right: 30px;
+}
+
+.l-d {
+	padding-top: 100px;
+}
+
+.c-t-b-r input {
+	box-shadow: 0 0 3px 1px #0094EA;
+}
+
+.c-t-b-r input,label {
+	font-size: 20px;
+}
+
+.p-f {
+	width: 210px;
+	height: 38px;
+	right: 0;
+	position: absolute;
+}
+.p-f-v {
+	width: 100px;
+	height: 38px;
+	right: 109px;
+	position: absolute;
+}
+
+.c-t-b-r div {
+	padding-top: 20px;
+}
+
+
+.c-t-b-r-s {
+	width: 310px;
+	height: 42px;
+	line-height: 42px;
+	background-color: #017EC0;
+	color: #ffffff;
+	font-size: 25px;
+	text-align: center;
+}
+.resultMessage {
+    font-size: 16px;
+    color: #EA4E39;
+} 
+.verifyimg{
+	width:100px;
+	height:39px;
+	right: 0;
+	position: absolute;
+}

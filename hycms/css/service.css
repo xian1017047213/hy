@@ -1,0 +1,28 @@
+.content_table{
+	font-size:14px;
+	border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    margin: 10px 0;
+    line-height: 24px;
+    overflow: auto;
+    zoom: 1;
+}
+.content_table thead {
+    background: #f8f8f8;
+    font-weight: bold;
+    color: #666;
+}
+.content_table td {
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    padding: 5px 20px;
+}
+.conright h5{
+	color: #28A7E1;
+	font-size: 16px;
+	font-weight: normal;
+}
+.conright div{
+	color: #999;
+	
+}
