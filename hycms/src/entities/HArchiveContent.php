@@ -38,6 +38,13 @@ class HArchiveContent
     /**
      * @var string
      *
+     * @ORM\Column(name="static_url", type="string", length=255, nullable=true)
+     */
+    private $staticUrl;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="code", type="string", length=255, nullable=true)
      */
     private $code;
@@ -118,6 +125,29 @@ class HArchiveContent
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set staticUrl
+     *
+     * @param string $staticUrl
+     * @return HArchiveContent
+     */
+    public function setStaticUrl($staticUrl)
+    {
+        $this->staticUrl = $staticUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get staticUrl
+     *
+     * @return string 
+     */
+    public function getStaticUrl()
+    {
+        return $this->staticUrl;
     }
 
     /**
