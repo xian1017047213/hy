@@ -1,5 +1,4 @@
 <?php 
-use hybase\Controller\ProductController;
 use hybase\Controller\ArchiveController;
 
 require_once __DIR__."/../../../src/controller/archive/ArchiveController.php";
@@ -119,8 +118,6 @@ static $secondGrade='contentlist';
 			foreach ($archiveRows as $archiveRow){
 				if (isset($archiveRow)) {
 					$archiveStatus=$archiveController->archiveStatusToString($archiveRow->getStatus());
-					/* $operProductStatus=$productController->operProductStatusToString($archiveRow['status']);
-					$productStatus=$productController->productStatusToString($archiveRow['status']); */
 				}
 				$versionTime=$archiveRow->getVersion ()->format('Y-d-m h:m:s');
 				$archiveTable =$archiveTable.'<tr class="odd">';
@@ -135,6 +132,7 @@ static $secondGrade='contentlist';
 									<ul style="z-index: 16;">
 										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveservice&operArchive=publish&archiveId='.$archiveRow->getId().'">发布</a></li>
 										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveservice&operArchive=delete&archiveId='.$archiveRow->getId().'" idx="0">删除</a></li>
+										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveedit&operArchive=update&archiveId='.$archiveRow->getId().'" idx="0">修改</a></li>
 									</ul>
 								</div>
 							</td>';
@@ -146,6 +144,7 @@ static $secondGrade='contentlist';
 										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveservice&operArchive=republish&archiveId='.$archiveRow->getId().'">再次发布</a></li>
 										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveservice&operArchive=cancelpublish&archiveId='.$archiveRow->getId().'" jsfunc="fnEnabledItem" idx="0">取消发布</a></li>
 										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveservice&operArchive=delete&archiveId='.$archiveRow->getId().'" idx="0">删除</a></li>
+										<li><a href="'.$pagebase.'hyu/content/?pageType=archiveedit&operArchive=update&archiveId='.$archiveRow->getId().'" idx="0">修改</a></li>
 									</ul>
 								</div>
 							</td>';

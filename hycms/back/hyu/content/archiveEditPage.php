@@ -1,6 +1,8 @@
 <?php
+use hybase\Controller\ArchiveController;
 
 include_once __DIR__ . '/../member/loginveri.php';
+require_once __DIR__ . "/../../../src/controller/archive/ArchiveController.php";
 static $oneGrade = 'contentmanager';
 static $secondGrade = 'addcontent';
 ?>
@@ -14,11 +16,18 @@ static $secondGrade = 'addcontent';
 <div class="content">
 <?php include_once __DIR__.'/archiveLeftNav.php';?>
 <div class="conright">
-<form id="" action="javasctipt:void(0);" class="u-f-t-i-t">
+<?php 
+$archiveController=new ArchiveController();
+if (isset($_GET['archiveId'])&&(!empty($_GET['archiveId']))) {
+	$archiveId=$_GET['archiveId'];
+	$archiveHead=$archiveController->getArchiveHead($archiveId);
+	$archiveContent=$archiveController->getArchiveContent($archiveId);
+}
+?>
+<form id="archiveDetail" action="javasctipt:void(0);" class="u-f-t-i-t">
 			<div class="ui-block-nofloat">
 				<span>基础信息</span>
 				<table class="table ">
-
 					<tbody>
 						<tr>
 							<td height="24" colspan="5" class="bline">
@@ -27,9 +36,9 @@ static $secondGrade = 'addcontent';
 										<tr>
 											<td width="90">文章标题：</td>
 											<td width="408">
-											<input name="title" type="text" id="title" value="" style="width: 350px;height: 32px;"></td>
+											<input name="title" type="text" id="title" value="<?php echo (empty($archiveHead)? '':$archiveHead->getTitle());?>" style="width: 350px;height: 32px;"></td>
 											<td width="90">&nbsp;简略标题：</td>
-											<td><input name="shorttitle" type="text" id="shorttitle"style="width: 150px;height: 32px;"></td>
+											<td><input name="shorttitle" type="text" value="<?php echo (empty($archiveHead)? '':$archiveHead->getSubtitle());?>" id="shorttitle"style="width: 150px;height: 32px;"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -42,7 +51,7 @@ static $secondGrade = 'addcontent';
 										<tr>
 											<td width="52">编码：</td>
 											<td width="408">
-											<input name="code" type="text" id="code" value="" style="width: 350px;height: 32px;"></td>
+											<input name="code" type="text" id="code" value="<?php echo (empty($archiveHead)? '':$archiveHead->getCode());?>" style="width: 350px;height: 32px;"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -106,7 +115,7 @@ static $secondGrade = 'addcontent';
 													cellpadding="1">
 													<tbody>
 														<tr>
-															<td height="30"><input name="picname" type="text" id="picname" style="width: 350px;height: 32px;float: left;">
+															<td height="30"><input name="picname" type="text" id="picname" value="<?php echo (empty($archiveHead)? '':$archiveHead->getLitpic());?>" style="width: 350px;height: 32px;float: left;">
 															<div id="selwriter" class="u-f-t-i-t-b" style="width: 63px;display: inline-block;float: left;height: 18px;margin-left: 4px;">
 															<label>上传文件</label>
 															<input id="thumbimg" name="thumbimg" type="file" style="opacity: 0;position: relative;top: -22px;width: 76px;left: -18px;height: 35px;margin-top: 0;">
@@ -177,7 +186,8 @@ static $secondGrade = 'addcontent';
 									<tbody>
 										<tr>
 											<td width="90">&nbsp;内容摘要：</td>
-											<td width="449"><textarea name="description" rows="5" id="description" style="width: 372px; height: 50px; border: 1px solid #aaa;"></textarea></td>
+											<?php //textarea禁止换行?>
+											<td width="449"><textarea  name="arvhivedesc" rows="5" id="arvhivedesc" style="width: 372px; height: 50px; border: 1px solid #aaa;"><?php echo (empty($archiveHead)? '':$archiveHead->getDescription());?></textarea></td>
 											<td width="261">&nbsp;</td>
 										</tr>
 									</tbody>
@@ -188,15 +198,16 @@ static $secondGrade = 'addcontent';
 					</tbody>
 				</table>
 			</div>
-			<input class="articlebody" id="articlebody" name="articlebody" value="" style="display: none;">
+			<input class="description" id="description" name="description" value="" style="display: none;">
+			<input class="archivebody" id="archivebody" name="archivebody" value="" style="display: none;">
 			<input class="pageType" id="pageType" name="pageType" value="archiveservice" style="display: none;">
-			<input class="operArchive" id="operArchive" name="operArchive" value="newarchivesave" style="display: none;">
+			<input class="operArchive" id="operArchive" name="operArchive" value="<?php echo (empty($archiveHead)? 'newarchivesave':'update');?>" style="display: none;">
 			<input class="saveType" id="saveType" name="saveType" value="archivesave" style="display: none;">
-			<input class="archiveId" id="archiveId" name="archiveId" value="" style="display: none;">
+			<input class="archiveId" id="archiveId" name="archiveId" value="<?php echo (empty($archiveHead)? '':$archiveHead->getId());?>" style="display: none;">
 			
 			<!-- 加载编辑器的容器 -->
-			<script id="container" name="content" type="text/plain"></script>
-			<button id="articlesave" name="articlesave" type="button" class="u-f-t-i-t-b" value="" style="margin-top: 10px;">保存</button>
+			<script id="container" name="content" type="text/plain"><?php echo (empty($archiveContent)? '':$archiveContent->getContent());?></script>
+			<button id="archivesave" name="archivesave" type="button" class="u-f-t-i-t-b" value="" style="margin-top: 10px;">保存</button>
 			<div><span class="resultMessage"></span></div>
 
 </form>

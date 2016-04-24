@@ -82,3 +82,32 @@
 .aoutbottom{
 	padding-bottom: 30px;
 }
+.new-list ul{
+	list-style: none;
+}
+.new-list img{
+	width: 160px;
+    border: 1px solid #EEE;
+    float: left;
+}
+.new-list p{
+	position: relative;
+	margin-left: 162px;
+}
+
+.new-list-title{
+	color: #28A7E1;
+	font-size: 18px;
+}
+.new-list-description {
+	font-size: 12px;
+	color: #999;
+}
+.new-content h3{
+	font-size: 26px;
+    text-align: center;
+    color: #596266;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px dotted #EEE;
+}

@@ -1,3 +1,10 @@
+<?php 
+use hybase\Controller\ArchiveController;
+
+require_once __DIR__ . "/../src/controller/archive/ArchiveController.php";
+
+$archiveController=new ArchiveController();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,46 +29,51 @@
 			<div class="conleft">
 			<ul class="conlist">
 			<li>
-			<h3>解决方案</h3>
+			<h3>新闻中心</h3>
 			</li>
-			<li class="on"><a href="javascript:void(0);">中小企业官网解决方案</a></li>
-			<li ><a href="javascript:void(0);">企业视觉效果解决方案</a></li>
+			<li ><a href="<?php echo $basicurl;?>hyupages/news.php">站内新闻</a></li>
+			<li class="on" style="border-color: rgb(242, 172, 40);" ><a href="<?php echo $basicurl;?>hyupages/news_view.php">行业快讯</a></li>
 			</ul>
 			</div>
 			<div class="conright">
-				<div>
-					<p>昌乐华禹电子商务有限公司是专门为中小型企业服务的山东民营企业，主要企业门户制作、网站维护、
-					企业门户原创元素、基于现有元素优化门户网站、中小型购物平台、中小型手机web平台，一体化网站制作等。</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">多语言解决方案</p>
-					<p>当前多语言网站仍处在网络营销的早期阶段,许多跨国公司使用多语言网站来巩固其国际地位。然而,接下来的影响将自然地发生,多语言网站将成为互联网营销存在的主要部分。不管企业是选择现在或将来,这都是外贸网络营销的唯一选择。</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">SEO推广解决方案</p>
-					<p>搜索引擎优化，即通过对网站优化来更加符合搜索引擎的排名规则，以提升关键词在搜索引擎上的排名。</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">网站原创设计解决方案</p>
-					<p>通过</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">一体化电商社区解决方案</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">企业网站综合管理解决方案</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">服务器容灾管理解决方案</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">地图接入</p>
-				</div>
-				<div>
-					<p style="color: #28A7E1;">网站分享</p>
-				</div>
-				<div>
-					<p></p>
+				<div class="new-content">
+				<?php
+				$ifContentValid = true;
+				if (isset ( $_GET ['pageType'] ) && ($_GET ['pageType'] == 'archiveDetail')) {
+					if (isset ( $_GET ['archiveId'] ) && (! empty ( $_GET ['archiveId'] ))) {
+						$archiveId = $_GET ['archiveId'];
+						$archiveHead = $archiveController->getArchiveHead ( $archiveId, $archiveController::$publishedArchive );
+						$archiveContent = $archiveController->getArchiveContent ( $archiveId );
+						if ((sizeof ( $archiveHead ) > 0) && (sizeof ( $archiveContent ) > 0)) {
+							echo '<h3 style="text-align: center;">' . $archiveHead->getTitle () . '<br><br><span style="font-size: 12px; color: rgb(127, 127, 127);font-weight: normal;">发布时间：' . $archiveHead->getVersion ()->format ( 'Y年m月d日' ) . '</span></h3>';
+							include_once __DIR__ . '/..' . $archiveContent->getStaticUrl ();
+						} else {
+							$ifContentValid = false;
+						}
+					} else {
+						$ifContentValid = false;
+					}
+					if (!$ifContentValid) {
+					header ( 'location:' . $basicurl . 'hyupages/news_view.php' );
+					exit ();
+					}
+				} else {
+					$archiveRows = $archiveController->getArchiveList ( null, null, null, $archiveController::$publishedArchive );
+					if (sizeof ( $archiveRows ) > 0) {
+						$archiveList = '<div class="new-list"><ul>';
+						foreach ( $archiveRows as $archiveRow ) {
+							$archiveList = $archiveList . '<li><a><img alt="" src="' . $archiveRow->getLitPic () . '"> </a>';
+							$archiveList = $archiveList . '<p class="new-list-title"><a href="' . $_SERVER ["REQUEST_URI"] . '?pageType=archiveDetail&archiveId=' . $archiveRow->getId () . '" style="color: #28A7E1;">' . $archiveRow->getTitle () . '</a></p>';
+							$archiveList = $archiveList . '<p class="new-list-description">' . $archiveRow->getDescription () . '</p>';
+							$archiveList = $archiveList . '<p class="new-list-description"><span>' . $archiveRow->getVersion ()->format ( 'Y年d月m日 h:m:s' ) . '</span></p></li>';
+						}
+						$archiveList = $archiveList . '</ul></div>';
+						echo $archiveList;
+					} else {
+						echo '<div class="new-list"> <h3>暂时没有行业资讯</h3> </div>';
+					}
+				}
+				?>
 				</div>
 			</div>
 		</div>

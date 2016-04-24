@@ -11,7 +11,7 @@
 					<span>新闻中心</span>
 					<ul>
 						<li><a href="<?php echo $basicurl?>hyupages/news.php">站内新闻</a></li>
-<!-- 						<li><a href="<?php echo $basicurl?>pages/news_view.html">行业快讯</a></li> -->
+						<li><a href="<?php echo $basicurl?>hyupages/news_view.php">行业快讯</a></li>
 					</ul>
 				</div>
 				<div class="listheader">

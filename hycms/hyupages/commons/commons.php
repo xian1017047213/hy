@@ -1,8 +1,8 @@
 <?php 
-$staticurl='http://www.hyusoft.cn/';
-$basicurl='http://www.hyusoft.cn/';
-//$staticurl='http://localhost/hyusoftforphp/';
-//$basicurl='http://localhost/hyusoftforphp/';
+// $staticurl='http://www.hyusoft.cn/';
+// $basicurl='http://www.hyusoft.cn/';
+$staticurl='http://localhost/';
+$basicurl='http://localhost/';
 ?>
 <?php 
 function tagconfim($urlStr){

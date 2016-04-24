@@ -24,8 +24,8 @@
 			<li>
 			<h3>新闻中心</h3>
 			</li>
-			<li class="on" style="border-color: rgb(242, 172, 40);" ><a href="javascript:void(0);">站内新闻</a></li>
-<!-- 			<li ><a href="javascript:void(0);">行业快讯</a></li> -->
+			<li class="on" style="border-color: rgb(242, 172, 40);" ><a href="<?php echo $basicurl;?>hyupages/news.php">站内新闻</a></li>
+			<li ><a href="<?php echo $basicurl;?>hyupages/news_view.php">行业快讯</a></li>
 			</ul>
 			</div>
 			<div class="conright">

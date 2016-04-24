@@ -11,31 +11,42 @@ class ArchiveManager {
 	function __construct() {
 		// print "In BaseClass constructor\n";
 	}
-	public function saveArchiveDetail($archiveId = NULL, $code, $title, $archivebody, $source, $writer) {
+	public function saveArchiveDetail($archiveId = NULL, $code, $title, $litpic,$description, $archivebody, $source, $writer) {
 		global $entityManager;
 		$entityManager->beginTransaction ();
 		try {
-			if (empty ( $archiveId )) {
-				$results = $entityManager->getRepository ( 'HArchiveHead' )->findBy ( array (
-						'code' => $code 
-				) );
-				if (sizeof ( $results ) > 0) {
+			$results = $entityManager->getRepository ( 'HArchiveHead' )->findBy ( array (
+					'code' => $code
+			) );
+			$ifCodeExist=false;
+			if (sizeof ( $results ) > 0) {
+				foreach ($results as $result){
+					if ($result->getId()!=$archiveId) {
+						return $ifCodeExist=true;
+					}
+				}
+				if ($ifCodeExist) {
 					return '文章编码不能重复！';
 				}
-				$archiveHeader = new \HArchiveHead ();
-				$archivecontent = new \HArchiveContent ();
+			}
+			if (!empty ( $archiveId )) {
+				$archiveHeader = $entityManager->find('HArchiveHead' , $archiveId);
 				$archiveHeader->setCode ( $code );
 				$archiveHeader->setTitle ( $title );
+				$archiveHeader->setLitpic ( $litpic );
+				$archiveHeader->setDescription ( $description );
 				$archiveHeader->setSource ( $source );
 				$archiveHeader->setWriter ( $writer );
 				$archiveHeader->setStatus ( self::$defaultArchiveStatus );
-				$archiveHeader->setVersion ( new \DateTime ( "now" ) );
-				$entityManager->persist ( $archiveHeader );
-				$entityManager->flush ();
+				$archiveHeader->setModifyTime( new \DateTime ( "now" ) );
+				$archivecontentId=$entityManager->getRepository('HArchiveContent')->findOneBy(array(
+						'headId' => $archiveId
+				))->getId();
+				if (!empty($archivecontentId)&&is_numeric($archivecontentId)) {
+				$archivecontent =$entityManager->find('HArchiveContent', $archivecontentId);
 				$archivecontent->setHeadId ( $archiveHeader->getId () );
 				$archivecontent->setContent ( $archivebody );
-				$archivecontent->setVersion ( new \DateTime ( "now" ) );
-				$entityManager->persist ( $archivecontent );
+				}
 				$entityManager->flush ();
 				$entityManager->commit ();
 				return true;
@@ -43,6 +54,8 @@ class ArchiveManager {
 			$archiveHeader = new \HArchiveHead ();
 			$archiveHeader->setCode ( $code );
 			$archiveHeader->setTitle ( $title );
+			$archiveHeader->setLitpic ( $litpic );
+			$archiveHeader->setDescription ( $description );
 			$archiveHeader->setSource ( $source );
 			$archiveHeader->setWriter ( $writer );
 			$entityManager->persist ( $archiveHeader );
@@ -118,6 +131,22 @@ class ArchiveManager {
 			$entityManager->close ();
 		}
 	}
+	public function updateArchiveContentStaticUrl($archiveId, $staticUrl) {
+		try {
+			global $entityManager;
+			$archivecontentId = $entityManager->getRepository ( 'HArchiveContent' )->findOneBy ( array (
+					'headId' => $archiveId 
+			) )->getId ();
+			if (! empty ( $archivecontentId ) && is_numeric ( $archivecontentId )) {
+				$archivecontent = $entityManager->find ( 'HArchiveContent', $archivecontentId );
+				$archivecontent->setStaticUrl ( $staticUrl );
+				$entityManager->flush ();
+			}
+			return true;
+		} catch ( Exception $e ) {
+			return false;
+		}
+	}
 	public function findArchiveContent($archiveId) {
 		global $entityManager;
 		$result = $entityManager->getRepository ( 'HArchiveContent' )->findOneBy ( array (
@@ -125,9 +154,16 @@ class ArchiveManager {
 		) );
 		return $result;
 	}
-	public function findArchiveHead($archiveId) {
+	public function findArchiveHead($archiveId, $archiveStatus = null) {
 		global $entityManager;
-		$result = $entityManager->getRepository ( 'HArchiveHead' )->find ( $archiveId );
+		if (empty ( $archiveStatus )) {
+			$result = $entityManager->getRepository ( 'HArchiveHead' )->find ( $archiveId );
+		} else {
+			$result = $entityManager->getRepository ( 'HArchiveHead' )->findOneBy ( array (
+				'id' => $archiveId ,
+				'status'=>$archiveStatus
+		) );
+		}
 		return $result;
 	}
 }

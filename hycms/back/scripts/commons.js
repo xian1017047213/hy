@@ -25,9 +25,10 @@ $(function() {
 				ajaxSend("post", url, "json", params);
 			});
 	
-	$("#articlesave").click(function() {
+	$("#archivesave").click(function() {
 		var ue = UE.getEditor('container');
-		$("#articlebody").attr("value", ue.getContent());
+		$("#description").val($("#arvhivedesc").val());
+		$("#archivebody").attr("value", ue.getContent());
 		var params = $("input").serialize();
 		var url = "/back/hyu/content/";
 		ajaxSend("post", url, "json", params);

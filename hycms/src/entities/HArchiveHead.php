@@ -141,6 +141,13 @@ class HArchiveHead
     private $litpic;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="modify_time", type="datetime", nullable=true)
+     */
+    private $modifyTime;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="pubdate", type="integer", nullable=true)
@@ -652,6 +659,29 @@ class HArchiveHead
     public function getLitpic()
     {
         return $this->litpic;
+    }
+
+    /**
+     * Set modifyTime
+     *
+     * @param \DateTime $modifyTime
+     * @return HArchiveHead
+     */
+    public function setModifyTime($modifyTime)
+    {
+        $this->modifyTime = $modifyTime;
+
+        return $this;
+    }
+
+    /**
+     * Get modifyTime
+     *
+     * @return \DateTime 
+     */
+    public function getModifyTime()
+    {
+        return $this->modifyTime;
     }
 
     /**
