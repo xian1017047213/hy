@@ -73,45 +73,49 @@ class ArchiveManager {
 			return "服务器处理异常！";
 		}
 	}
-	public function findArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status=NULL , $createStart=NULL,$createEnd=NULL,$archivebody = NULL, $source = NULL, $writer = NULL) {
+	public function findArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status = NULL, $createStart = NULL, $createEnd = NULL, $archivebody = NULL, $source = NULL, $writer = NULL) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();
 		if ((empty ( $status )) && (empty ( $archiveId )) && (empty ( $code )) && (empty ( $title )) && (empty ( $createStart )) && (empty ( $createEnd )) && (empty ( $archivebody )) && (empty ( $source )) && (empty ( $writer ))) {
 			$queryBuilder->select ( array (
 					'hah' 
-			) )->from ( 'HArchiveHead', 'hah' )->where ( $queryBuilder->expr ()->andX ( $queryBuilder->expr ()->neq ( 'hah.status', '?1' ) ) )->orderBy ( 'hah.id', 'desc' )->setParameter ( 1, 3 );
+			) )->from ( 'HArchiveHead', 'hah' )
+			->where ( $queryBuilder->expr ()->andX ( 
+					$queryBuilder->expr ()->neq ( 'hah.status', '?1' ) ) )
+			->orderBy ( 'hah.id', 'desc' )
+			->setParameter ( 1, 3 );
 			$query = $queryBuilder->getQuery ();
 			$results = $query->getResult ();
 			return $results;
 		}
-		
-		 $queryBuilder = $entityManager->createQueryBuilder ();
-		 $code = '%' . $code . '%';
-		 $title = '%' . $title . '%';
-		 $status = '%' . $status . '%';
-		 $createStart=\DateTime::createFromFormat('Y-m-d H:i:s', $createStart);
-		if (empty($createEnd)) {
-			$createEnd= new \DateTime("now");
-		}else {			
-			$createEnd=\DateTime::createFromFormat('Y-m-d H:i:s', $createEnd);
+		$queryBuilder = $entityManager->createQueryBuilder ();
+		$code = '%' . $code . '%';
+		$title = '%' . $title . '%';
+		$status = '%' . $status . '%';
+		$createStart = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $createStart );
+		if (empty ( $createEnd )) {
+			$createEnd = new \DateTime ( "now" );
+		} else {
+			$createEnd = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $createEnd );
 		}
-		 $queryBuilder->select ( array (
-		 'hah'
-		 ) )->from ( 'HArchiveHead', 'hah' )->where ( $queryBuilder->expr ()->andX ( 
-		 $queryBuilder->expr ()->like ( 'hah.code', '?1' ),
-		  $queryBuilder->expr ()->like ( 'hah.title', '?2' ), 
-		  $queryBuilder->expr ()->like ( 'hah.status', '?3' ), 
-		  $queryBuilder->expr ()->between('hah.version', '?4', '?5') ) )
-		  ->orderBy ( 'hah.id', 'desc' )
-		  ->setParameter ( 1, $code )
-		  ->setParameter ( 2, $title )
-		  ->setParameter ( 3, $status )
-		  ->setParameter ( 4, $createStart )
-		  ->setParameter ( 5, $createEnd );
-		 $query = $queryBuilder->getQuery ();
-		 $results = $query->getResult ();
-		 return $results;
-		
+		$queryBuilder->select ( array (
+				'hah' 
+		) )
+		->from ( 'HArchiveHead', 'hah' )
+		->where ( $queryBuilder->expr ()->andX ( 
+				$queryBuilder->expr ()->like ( 'hah.code', '?1' ), 
+				$queryBuilder->expr ()->like ( 'hah.title', '?2' ), 
+				$queryBuilder->expr ()->like ( 'hah.status', '?3' ) , 
+				$queryBuilder->expr ()->between ( 'hah.version', '?4', '?5' )) )
+		->orderBy ( 'hah.id', 'desc' )
+		->setParameter ( 1, $code )
+		->setParameter ( 2, $title )
+		->setParameter ( 3, $status )
+ 		->setParameter ( 4, $createStart )
+ 		->setParameter ( 5, $createEnd );
+		$query = $queryBuilder->getQuery ();
+		$results = $query->getResult ();
+		return $results;
 	}
 	public function updateArchiveStatus($archiveId, $archiveStatus,$sendDate) {
 		global $entityManager;

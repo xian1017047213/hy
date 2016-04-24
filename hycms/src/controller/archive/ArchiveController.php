@@ -97,7 +97,7 @@ class ArchiveController {
 			$archiveContent=$contentResult->getContent();
 			$directoryAndFileOper->createFileDirectory($htmlPathCreate);
 			$directoryAndFileOper->createFile($htmlPathCreate, $dateHtmlName, $archiveContent, self::$fileType);
-			$archiveStaticUrl=$timePath.$dateHtmlName.'.'.self::$fileType;
+			$archiveStaticUrl=$htmlPathCreate.$dateHtmlName.'.'.self::$fileType;
 			$archiveManager->updateArchiveContentStaticUrl($archiveId, $archiveStaticUrl);
 			$archiveManager->updateArchiveStatus($archiveId, self::$publishedArchive,$dateHtmlName);
 			return true;

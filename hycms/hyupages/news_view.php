@@ -46,7 +46,7 @@ $archiveController=new ArchiveController();
 						$archiveContent = $archiveController->getArchiveContent ( $archiveId );
 						if ((sizeof ( $archiveHead ) > 0) && (sizeof ( $archiveContent ) > 0)) {
 							echo '<h3 style="text-align: center;">' . $archiveHead->getTitle () . '<br><br><span style="font-size: 12px; color: rgb(127, 127, 127);font-weight: normal;">发布时间：' . $archiveHead->getVersion ()->format ( 'Y年m月d日' ) . '</span></h3>';
-							include_once __DIR__ . '/..' . $archiveContent->getStaticUrl ();
+							include_once $archiveContent->getStaticUrl ();
 						} else {
 							$ifContentValid = false;
 						}
