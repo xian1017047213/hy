@@ -58,6 +58,7 @@ class ArchiveManager {
 			$archiveHeader->setDescription ( $description );
 			$archiveHeader->setSource ( $source );
 			$archiveHeader->setWriter ( $writer );
+			$archiveHeader->setStatus ( self::$defaultArchiveStatus );
 			$entityManager->persist ( $archiveHeader );
 			$entityManager->flush ();
 			$archivecontent = new \HArchiveContent ();

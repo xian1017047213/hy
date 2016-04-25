@@ -11,4 +11,7 @@ $(function(){
 			}			
 		}
 	}
+	if (document.body.clientHeight<document.body.scrollHeight) {
+		$(".blank-block").css("height",(document.body.scrollHeight-document.body.clientHeight));
+	}
 });

@@ -75,6 +75,7 @@ $archiveController=new ArchiveController();
 				}
 				?>
 				</div>
+				<div class="blank-block"></div>
 			</div>
 		</div>
 	</div>

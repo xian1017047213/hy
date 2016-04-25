@@ -38,3 +38,4 @@
 		</div>
 	</div>
 	<div class="footerbottom">© 2016 华禹版权所有<a href="http://www.beian.gov.cn/" >鲁ICP备16007026号-1</a></div>
+	<script type="text/javascript" src="<?php echo $staticurl?>scripts/commons.js"></script>

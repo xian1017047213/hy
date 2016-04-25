@@ -86,6 +86,7 @@
 						<li>关键服务及购买方式请联系<a href="<?php echo $staticurl?>hyupages/contact.php">本公司</a></li>
 					</ul>
 				</div>
+				<div class="blank-block"></div>
 			</div>
 			
 	</div></div>

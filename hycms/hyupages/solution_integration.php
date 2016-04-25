@@ -38,7 +38,7 @@
 					<p style="font-size: 15px;padding-left: 32px;">2.网站功能持续研发，网站提供升级标准，避免网站功能落后。</p>
 					<p style="font-size: 15px;padding-left: 32px;">3.提供快速建站标准，实现网站快速建设，缩短研发成本和时间，旨在实现网站快速建设。</p>
 				</div>
-				
+				<div class="blank-block"></div>
 			</div>
 		</div>
 	</div>

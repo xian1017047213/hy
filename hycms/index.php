@@ -87,5 +87,5 @@
 	<?php include 'hyupages/commons/footer.php';?>
 	<?php include 'hyupages/commons/cs.php';?>
 </body>
-<script type="text/javascript" src="<?php echo $staticurl?>scripts/commons.js"></script>
+
 </html>
