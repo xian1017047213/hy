@@ -47,5 +47,4 @@
 	</div>
 <?php include 'commons/footer.php';?>
 </body>
-<script type="text/javascript" src="<?php echo $staticurl?>scripts/commons.js"></script>
 </html>
