@@ -4,7 +4,6 @@
 <?php include 'hyupages/commons/commons.php';?>
 <link href="<?php echo $staticurl?>css/content.css" rel="stylesheet" type="text/css">
 <meta property="qc:admins" content="5640362427601537646367" />
-<title>网站建设|山东网站建设|潍坊网站建设|华禹科技|昌乐华禹电子商务有限公司</title>
 </head>
 <body>
 <?php include 'hyupages/commons/header.php';?>

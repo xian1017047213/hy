@@ -1,8 +1,8 @@
 <?php 
-// $staticurl='http://www.hyusoft.cn/';
-// $basicurl='http://www.hyusoft.cn/';
-$staticurl='http://localhost/';
-$basicurl='http://localhost/';
+$staticurl='http://www.hyusoft.cn/';
+$basicurl='http://www.hyusoft.cn/';
+// $staticurl='http://localhost/';
+// $basicurl='http://localhost/';
 ?>
 <?php 
 function tagconfim($urlStr){
@@ -34,3 +34,4 @@ if ($selectedcode==$urlStr){
 <script type="text/javascript" src="<?php echo $staticurl?>scripts/jquery-1.7.2.min.js"></script>
 <meta name="keywords" content="潍坊网站建设,潍坊网站制作,山东网站设计,网站建设,山东网站建设公司,山东网页设计,山东网站设计公司,山东网络公司，山东网站制作公司,微网站,微网站建设,山东网站公司，微信公众号，手机端商城">
 <meta name="description" content="华禹科技专注于山东网站建设、山东网站制作、山东网站设计、山东微网站建设、微信网站建设于一体的网站建设服务，从客户角度设计建设网站，提供一站式从建站到网络营销服务。从事多年的网站建设专家，值得信赖">
+<title>潍坊华禹|潍坊网站建设|山东网站建设|网站建设|昌乐华禹电子商务有限公司</title>

@@ -10,7 +10,6 @@ $archiveController=new ArchiveController();
 <head>
 <?php include 'commons/commons.php';?>
 <link href="../css/about.css" rel="stylesheet" type="text/css">
-<title>网站建设|山东网站建设|潍坊网站建设|华禹科技|昌乐华禹电子商务有限公司</title>
 </head>
 <body>
 <?php include 'commons/header.php';?>
