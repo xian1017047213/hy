@@ -37,7 +37,7 @@ static $secondGrade='productDetail';
 					<span style="display: inline;">产品编码</span>
 					</label></div>
 					<div class="ui-block-line-body">
-					<input class="table-input" type="text" name="productcode" value="" id="productcode"/>
+					<input class="table-input" type="text" name="productCode" value="" id="productCode"/>
 					</div>
 				</div>
 				<div class="ui-block-line">
@@ -47,7 +47,7 @@ static $secondGrade='productDetail';
 				<span style="display: inline;">产品标题</span>
 				</label></div>
 					<div class="ui-block-line-body">
-				<input class="table-input" type="text" name="producttitle" value="" />
+				<input class="table-input" type="text"  name="productTitle" id="productTitle" value="" />
 				</div>
 				</div>
 				<div class="ui-block-line">
@@ -57,7 +57,7 @@ static $secondGrade='productDetail';
 				<span style="display: inline;">产品副标题</span>
 				</label></div>
 					<div class="ui-block-line-body">
-				<input class="table-input" type="text" name="productsketch" value="" />
+				<input class="table-input" type="text" name="productSubTitle" id="productSubTitle" value="" />
 				</div>
 				</div>
 				</div>

@@ -8,18 +8,13 @@ $archiveController = new ArchiveController();
 header ( "Content-Type: text/html; charset=UTF-8" );
 if (isset ( $_POST ["operArchive"] )) {
 	$postDataType = $_POST ["operArchive"];
-	if ($postDataType == 'newarchivesave') {
-		if (empty($_POST ['archiveId'])) {
-			$saveResult='数据异常';
-			$saveResult = $archiveController->saveArchiveDetail( $_POST ['archiveId'], $_POST ['code'],$_POST ['title'],$_POST ['picname'],$_POST['description'], $_POST ['archivebody'], $_POST ['source'], $_POST ['writer']);
-		}else {			
+	if ($postDataType == 'newarchivesave') {		
 			$saveResult = $archiveController->saveArchiveDetail ( $_POST ['archiveId'], $_POST ['code'],$_POST ['title'],$_POST ['picname'],$_POST['description'], $_POST ['archivebody'], $_POST ['source'], $_POST ['writer']);
-		}
 		if ($saveResult === true) {
 			$url = $pagebase . "hyu/content/";
 			echo json_encode ( array (
 					'status' => 'success',
-					'url' => null,
+					'url' => $url,
 					'description' => $saveResult 
 			) );
 		} else {
@@ -31,7 +26,10 @@ if (isset ( $_POST ["operArchive"] )) {
 		}
 	}
 	if ($postDataType == 'update') {
-		$saveResult = $archiveController->saveArchiveDetail ( $_POST ['archiveId'], $_POST ['code'], $_POST ['title'],$_POST ['picname'], $_POST ['description'], $_POST ['archivebody'], $_POST ['source'], $_POST ['writer'] );
+		if (empty($_POST ['archiveId'])) {
+			$saveResult='数据异常';
+			$saveResult = $archiveController->saveArchiveDetail ( $_POST ['archiveId'], $_POST ['code'], $_POST ['title'],$_POST ['picname'], $_POST ['description'], $_POST ['archivebody'], $_POST ['source'], $_POST ['writer'] );
+		}
 		if ($saveResult === true) {
 			$url = $pagebase . "hyu/content/";
 			echo json_encode ( array (

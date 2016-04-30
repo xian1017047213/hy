@@ -1,10 +1,10 @@
 <?php
 namespace hybase\Manager;
 
-use hybase\Repository;
+use hybase\Tools\SystemParameter;
 
 require_once __DIR__ . '/../datamanager/database.php';
-require_once __DIR__ .'/../repository/UserRespository.php';
+require_once __DIR__ .'/../tools/SystemParameter.php';
 class ProductManager {
 	function __construct() {
 		// print "In BaseClass constructor\n";
@@ -20,10 +20,73 @@ class ProductManager {
 			return false;
 		}
 	}
+	public function saveProduct($productCode, $productTitle, $prodiuctSubTitle, $productPropertiesIdArray,$productPropertiesValueArray, $productSketch, $propuctDescription) {
+		global $entityManager;
+		$entityManager->beginTransaction ();
+		try {
+			$product = new \HShopProduct ();
+			$product->setCode ( $productCode );
+			$product->setStatus ( SystemParameter::$productStatusIni );
+			$product->setCreateTime ( new \DateTime ( 'now' ) );
+			$product->setType ( SystemParameter::$productTypeSale );
+			$product->setVersion ( new \DateTime ( 'now' ) );
+			$entityManager->persist ( $product );
+			$entityManager->flush ();
+			$productDetail = new \HShopProductDetail ();
+			$productDetail->setProductId ( $product->getId () );
+			$productDetail->setTitle ( $productTitle );
+			$productDetail->setSubTitle ( $prodiuctSubTitle );
+			$productDetail->setCreateTime ( new \DateTime ( 'now' ) );
+			$productDetail->setSketch ( $productSketch );
+			$productDetail->setDescription ( $propuctDescription );
+			$productDetail->setVersion ( new \DateTime ( 'now' ) );
+			$entityManager->persist ( $productDetail );
+			$entityManager->flush ();
+			if (!empty($productPropertiesArray)) {
+				self::saveProductProperties($productPropertiesArray);
+			}
+			if (!empty($productPropertiesValueArray)) {
+				self::saveProductProperties($productPropertiesValueArray,SystemParameter::$editTypeWithInputtext);
+			}
+			$entityManager->commit();
+		} catch ( Exception $e ) {
+			$entityManager->rollback ();
+		}
+		$entityManager->close ();
+	}
+	public function saveProductProperties($propuctPropertiesArray, $type = NULL) {
+		global $entityManager;
+		$entityManager->beginTransaction ();
+		try {
+			foreach ($propuctPropertiesArray as $productProperty){				
+			$productProperties = new \HShopProductProperties ();
+			$productProperties->setProductId ( $productId );
+			$productProperties->setCreateTime ( new \DateTime ( 'now' ) );
+			$productProperties->setPropertyId ( $propertyId );
+			if (! empty ( $type )) {
+				$productProperties->setPropertyValue( $propertyValueId );
+			} else {
+				$productProperties->setPropertyValueId ( $propertyValueId );
+			}
+			$productProperties->setVersion ( new \DateTime ( 'now' ) );
+			$entityManager->persist ( $productProperties );
+			$entityManager->flush ();
+			}
+			$entityManager->commit();
+		} catch ( Exception $e ) {
+			$entityManager->rollback ();
+		}
+		$entityManager->close ();
+	}
 	public function findAllProductList(){
 		global $entityManager;
 		$productBaseList=$entityManager->getRepository ( 'HShopProduct' )->findAll ();
 		return $productBaseList;
+	}
+	public function findAllProductTypeList(){
+		global $entityManager;
+		$propertyTypeList=$entityManager->getRepository ( 'HShopProperty' )->findAll ();
+		return $propertyTypeList;
 	}
 	public function findAllProductListWithDetail(){
 		global $entityManager;

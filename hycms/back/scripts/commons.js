@@ -34,6 +34,7 @@ $(function() {
 		ajaxSend("post", url, "json", params);
 	});
 	
+	
 	$("#verifylink").click(function() {
 		$url = $(".verifyimg").attr("src");
 		$(".verifyimg").attr("src", $url);
@@ -48,6 +49,12 @@ $(function() {
 	$("#userDetailSave").click(function() {
 		var params = $("form").serialize();
 		var url = "/back/hyu/system/";
+		ajaxSend("post", url, "json", params);
+	});
+	
+	$("#propertySave").click(function() {
+		var params = $("form").serialize();
+		var url = "/back/hyu/operate/";
 		ajaxSend("post", url, "json", params);
 	});
 	
@@ -82,12 +89,14 @@ function ajaxSend(type, url, datatype, data) {
 		dataType : datatype,
 		data : data,
 		success : function(msg) {
-			if (msg.url == null) {
-				clearinfor();
-				$('.resultMessage').append(msg.description);
-				setMessage = setInterval('clearinfor()', 5000);
-			} else {
-				window.location = msg.url;
+			if (msg!=null) {				
+				if (msg.url == null) {
+					clearinfor();
+					$('.resultMessage').append(msg.description);
+					setMessage = setInterval('clearinfor()', 5000);
+				} else {
+					window.location = msg.url;
+				}
 			}
 		},
 		error : function(msg) {

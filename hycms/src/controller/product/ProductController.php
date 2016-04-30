@@ -69,6 +69,18 @@ class ProductController{
 		}
 		return '非定义状态';
 	}
+	public function saveNewProduct($productCode,$productTitle,$prodiuctSubTitle,$productPropertiesArray,$productSketch,$propuctDescription){
+		$productManager= new ProductManager();
+		if ($productCode) {
+			return '产品编码不能为空！';
+		}
+		if (condition) {
+			return '产品标题不能为空' ;
+		}
+		$result=$productManager->saveProduct($productCode,$productTitle,$prodiuctSubTitle,$productPropertiesArray,$productSketch,$propuctDescription);
+		return $productList;
+		
+	}
 	public function getAllPorductList(){
 		$productManager= new ProductManager();
 		$productList=$productManager->findAllProductList();
@@ -165,5 +177,10 @@ class ProductController{
 		}
 		
 		return $resultToArrays;
+	}
+	public function getPropertyTypeList(){
+		$productManager=new ProductManager();
+		$results=$productManager->findAllProductTypeList();
+		return $results;
 	}
 }

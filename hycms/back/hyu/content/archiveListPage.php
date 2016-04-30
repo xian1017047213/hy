@@ -119,7 +119,7 @@ static $secondGrade='contentlist';
 				if (isset($archiveRow)) {
 					$archiveStatus=$archiveController->archiveStatusToString($archiveRow->getStatus());
 				}
-				$versionTime=$archiveRow->getVersion ()->format('Y-d-m h:m:s');
+				$versionTime=$archiveRow->getVersion ()->format('Y-m-d h:m:s');
 				$archiveTable =$archiveTable.'<tr class="odd">';
 				$archiveTable =$archiveTable.'<td class="col-0 "><input type="checkbox" name="chid" class="checkId" value="'.$archiveRow->getId().'"></td>';
 				$archiveTable =$archiveTable.'<td class="col-1 "><span title="'.$archiveRow->getCode().'">'.$archiveRow->getCode().'</span></td>';
