@@ -57,11 +57,22 @@ $(function() {
 		var url = "/back/hyu/operate/";
 		ajaxSend("post", url, "json", params);
 	});
+	$('#propertyValueSave').click(function(){
+		var params = $("form").serialize();
+		var url = "/back/hyu/operate/";
+		ajaxSend("post", url, "json", params);
+	});
 	
 	$('.ui-poplist').hover(function() {
 		$(this).children("ul").css("display", "block");
 	}, function() {
 		$(this).children("ul").css("display", "none");
+	});
+	$('#addPropertyValueLine').click(function(){
+		$('.t-body').append('<tr> <td width="52"><input type="checkbox" style="margin-top: 10px;"><input type="hidden" name="propertyValueId[]" value="newvalue"><input type="hidden" name="propertyValueSequence[]" value="'+($('.t-body tr').length+1)+'"></td> <td width="408"> <input name="properyValue[]" type="text" id="properyValue" value="" style="width: 350px;height: 32px;"></td></tr>');
+	});
+	$('#removePropertyValueLine').click(function(){
+		$("input:checkbox:checked").parents('tr').remove();
 	});
 
 });

@@ -75,8 +75,7 @@ static $secondGrade='productDetail';
 				<div class="ui-block-table">
 				<?php
 				foreach ($propertiesResults as $propertiesResult){
-					//echo json_encode($propertiesResult);
-					echo '<div class="ui-block-line"><div class="ui-block-line-title">'.$propertiesResult['title'].'</div><div class="ui-block-line-body">'.$propertiesResult['body'].'</div></div>';
+					echo '<div class="ui-block-line"><div class="ui-block-line-title">'.$propertiesResult['title'].'</div><div class="ui-block-line-body">'.(empty($propertiesResult['body'])?'':$propertiesResult['body']).'</div></div>';
 				}
 				?>
 				</div>

@@ -121,26 +121,26 @@ static $secondGrade='propertylist';
 				$propertyTable =$propertyTable.'<td class="col-2 "><span title="'.$propertyRow->getName().'">'.$propertyRow->getName().'</span></td>';
 				$propertyTable =$propertyTable.'<td class="col-3 ">'.$versionTime.'</td>';
 				$propertyTable =$propertyTable.'<td class="col-2 "><span title="'.$propertyRow->getStatus().'">'.$propertyStatus.'</span></td>';
-				if ($propertyRow->getStatus()==4) {
+				if ($propertyRow->getEditType()==4) {
 					$propertyTable =$propertyTable.'<td class="col-5 ">
 								<div class="ui-poplist">
 									<div class="current">修改</div>
 									<ul style="z-index: 16;">
 										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyedit&propertyId='.$propertyRow->getId().'" idx="0">修改</a></li>
-										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyservice&operProperty='.$operProperty.'&propertyId='.$propertyRow->getId().'" idx="0">'.$operPropertyStatus.'</a></li>
+										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyservice&operProperty=operPropertyStatus&operStatus='.$operProperty.'&propertyId='.$propertyRow->getId().'" idx="0">'.$operPropertyStatus.'</a></li>
 									</ul>
 									</div>
 								</div>
 							</td>';
 				}
-				if ($propertyRow->getStatus()==1||$propertyRow->getStatus()==2||$propertyRow->getStatus()==3) {
+				if ($propertyRow->getEditType()==1||$propertyRow->getEditType()==2||$propertyRow->getEditType()==3) {
 					$propertyTable =$propertyTable.'<td class="col-5 ">
 								<div class="ui-poplist">
 									<div class="current">修改</div>
 									<ul style="z-index: 16;">
 										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyedit&propertyId='.$propertyRow->getId().'" idx="0">修改</a></li>
-										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyservice&operProperty='.$operProperty.'&propertyId='.$propertyRow->getId().'" idx="0">'.$operPropertyStatus.'</a></li>
-										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyservice&operProperty=addpropertyvalue&propertyId='.$propertyRow->getId().'" idx="0">添加属性值</a></li>
+										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyservice&operProperty=operPropertyStatus&operStatus='.$operProperty.'&propertyId='.$propertyRow->getId().'" idx="0">'.$operPropertyStatus.'</a></li>
+										<li><a href="'.$pagebase.'hyu/operate/?pageType=propertyvalue&operProperty=editpropertyvalue&propertyId='.$propertyRow->getId().'" idx="0">添加属性值</a></li>
 									</ul>
 									</div>
 								</div>
