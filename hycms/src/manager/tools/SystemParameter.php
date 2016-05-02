@@ -55,6 +55,10 @@ class SystemParameter{
 	 * 已下架商品
 	 */
 	public static $productStatusOut = 3;
+	/*
+	 * 已删除商品
+	 */
+	public static $productStatusdelete = 4;
 	
 	/*
 	 * 多选按钮

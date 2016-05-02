@@ -1,5 +1,6 @@
 <?php 
 use hybase\Controller\ProductController;
+use hybase\Tools\SystemParameter;
 
 require_once __DIR__."/../../../src/controller/product/ProductController.php";
 include_once __DIR__.'/../member/loginveri.php';
@@ -148,8 +149,14 @@ static $secondGrade='productmanager';
 			foreach ($productRows as $productRow){
 				if (isset($productRow)) {
 					$productType=$productController->productTypeToString($productRow['type']);
-					$operProductStatus=$productController->operProductStatusToString($productRow['status']);
+					$operProductStatusString=$productController->operProductStatusToString($productRow['status']);
+					$operProductStatus=$productController->operProductStatus($productRow['status']);
 					$productStatus=$productController->productStatusToString($productRow['status']);
+					if (!empty($productRow['modifyTime'])) {
+						$modifyTime=$productRow['modifyTime']->format('Y-d-m h:m:s');
+					}else {
+						$modifyTime=null;
+					}
 				}
 				$userTable =$userTable.'<tr class="odd">';
 				$userTable =$userTable.'<td class="col-0 "><input type="checkbox" name="chid" class="checkId" value="'.$productRow['id'].'"></td>';
@@ -157,18 +164,18 @@ static $secondGrade='productmanager';
 				$userTable =$userTable.'<td class="col-2 "><span title="'.$productRow['title'].'">'.$productRow['title'].'</span></td>';
 				$userTable =$userTable.'<td class="col-5 ">'.$productRow['industryName'].'</td>';
 				$userTable =$userTable.'<td class="col-6 "><span class="ui-pyesno ui-pyesno-wait" title="'.$productStatus.'">'.$productStatus.'</span></td>';
-				$userTable =$userTable.'<td class="col-7 "><span title="'.$productRow['createTime']->format('Y-d-m h:m:s').'">'.$productRow['createTime']->format('Y-d-m h:m:s').'</td>';
-				$userTable =$userTable.'<td class="col-8 "><span title="'.$productRow['modifyTime']->format('Y-d-m h:m:s').'">'.$productRow['modifyTime']->format('Y-d-m h:m:s').'</span></td>';
-				$userTable =$userTable.'<td class="col-9 "><span title="'.$productRow['listTime']->format('Y-d-m h:m:s').'">'.$productRow['listTime']->format('Y-d-m h:m:s').'</span></td>';
-				$userTable =$userTable.'<td class="col-10 "><span title="'.$productRow['activeBeginTime']->format('Y-d-m h:m:s').'">'.$productRow['activeBeginTime']->format('Y-d-m h:m:s').'</span></td>';
+				$userTable =$userTable.'<td class="col-7 "><span title="'.(empty($productRow['createTime'])?'':$productRow['createTime']->format('Y-d-m h:m:s')).'">'.(empty($productRow['createTime'])?'':$productRow['createTime']->format('Y-d-m h:m:s')).'</td>';
+				$userTable =$userTable.'<td class="col-8 "><span title="'.(empty($productRow['modifyTime'])?'':$productRow['modifyTime']->format('Y-d-m h:m:s')).'">'.(empty($productRow['modifyTime'])?'':$productRow['modifyTime']->format('Y-d-m h:m:s')).'</span></td>';
+				$userTable =$userTable.'<td class="col-9 "><span title="'.(empty($productRow['listTime'])?'':$productRow['listTime']->format('Y-d-m h:m:s')).'">'.(empty($productRow['listTime'])?'':$productRow['listTime']->format('Y-d-m h:m:s')).'</span></td>';
+				$userTable =$userTable.'<td class="col-10 "><span title="'.(empty($productRow['activeBeginTime'])?'':$productRow['activeBeginTime']->format('Y-d-m h:m:s')).'">'.(empty($productRow['activeBeginTime'])?'':$productRow['activeBeginTime']->format('Y-d-m h:m:s')).'</span></td>';
 				$userTable =$userTable.'<td class="col-11 ">'.$productType.'</td>';
 				$userTable =$userTable.'<td class="col-13 ">
 								<div class="ui-poplist">
 									<div class="current">修改</div>
 									<ul style="z-index: 16;">
-										<li><a href="'.$pagebase.'hyu/product/productoper.php?pageType=productdetail&userId='.$productRow['id'].'">修改</a></li>
-										<li><a href="'.$pagebase.'hyu/product/productoper.php?pageType=productlist&userId='.$productRow['id'].'" jsfunc="fnEnabledItem" idx="0">'.$operProductStatus.'</a></li>
-										<li><a href="'.$pagebase.'hyu/product/productoper.php?pageType=productdelete&userId='.$productRow['id'].'" idx="0">删除</a></li>
+										<li><a href="'.$pagebase.'hyu/product/?pageType=productdetail&productId='.$productRow['id'].'">修改</a></li>
+										<li><a href="'.$pagebase.'hyu/product/?pageType=productService&productId='.$productRow['id'].'&operType='.$operProductStatus.'">'.$operProductStatusString.'</a></li>
+										<li><a href="'.$pagebase.'hyu/product/?pageType=productService&productId='.$productRow['id'].'&operType='.SystemParameter::$productStatusdelete.'" idx="0">删除</a></li>
 									</ul>
 								</div>
 							</td>';

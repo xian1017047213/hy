@@ -33,7 +33,15 @@ $(function() {
 		var url = "/back/hyu/content/";
 		ajaxSend("post", url, "json", params);
 	});
-	
+	$("#productSave").click(function() {
+		var description = UE.getEditor('description');
+		var sketch = UE.getEditor('sketch');
+		$("#productDesc").attr("value",description.getContent());
+		$("#productSketch").attr("value",sketch.getContent());
+		var params = $("input").serialize();
+		var url = "/back/hyu/product/";
+		ajaxSend("post", url, "json", params);
+	});
 	
 	$("#verifylink").click(function() {
 		$url = $(".verifyimg").attr("src");

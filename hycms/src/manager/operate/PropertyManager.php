@@ -142,7 +142,15 @@ class PropertyManager {
 		}
 		$entityManager->close ();
 	}
-	public function findAllPrpertyList($propertyId, $propertyGroupCode, $propertyName, $propertyStatus) {
+	public function findAllEnableProperty(){
+		global $entityManager;
+		$propertyList=$entityManager->getRepository('HShopProperty')->findBy(array(
+				'status'=>SystemParameter::$enableStatus
+		));
+		
+		return $propertyList;
+	}
+	public function findAllPropertyByCondition($propertyId, $propertyGroupCode, $propertyName, $propertyStatus) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();
 		if ((empty ( $propertyId )) && (empty ( $propertyGroupCode )) && (empty ( $propertyName )) && (empty ( $propertyStatus ))) {
@@ -174,40 +182,37 @@ class PropertyManager {
 		$propertyValueDetail = $queryBuilder->getQuery ()->getResult ();
 		return $propertyValueDetail;
 	}
+	public function findPropertyListWithValue(){
+		global $entityManager;
+		$queryBuilder=$entityManager->createQueryBuilder();
+		$queryBuilder->select(array('
+				hsp.id,
+				hsp.name,
+				hsp.groupCode,
+				hsp.status,
+				hsp.editType,
+				hspv.id as propertyValueId,
+				hspv.value'))
+				->from('HShopProperty', 'hsp')
+				->leftJoin('HShopPropertyValue', 'hspv')
+				->andWhere($queryBuilder->expr()->andX(
+							$queryBuilder->expr()->eq('hsp.id', 'hspv.propertyId'),
+							$queryBuilder->expr()->eq('hsp.status', SystemParameter::$enableStatus)
+							))
+				->andWhere($queryBuilder->expr()->eq('hsp.status', SystemParameter::$enableStatus))
+				->orderBy('hsp.id','asc');
+				$query=$queryBuilder->getQuery();
+				$result=$query->getArrayResult();
+				return $result;
+				//return $query;
 	
+	}
 	/*
 	 * -----------------------------------------------------------------------------------------------
 	 */
 	
 	
-	public function findProductProperties1($productId) {
-		global $entityManager;
-		$dql = "SELECT
-				hsp
-				FROM HShopProperty hsp
-				LEFT JOIN HShopPropertyValue hspv with  WHERE hsp.id=hspv.propertyId
-				LEFT JOIN ( SELECT hspp FROM HShopProductProperties hspp  WHERE hspp.product_id=null) hspp WHERE hspp.productValueId=hspv.id";
-		$productBaseList = $entityManager->createQuery ( $dql )->getArrayResult ();
-		// $productBaseList=$entityManager->getRepository ( 'HShopProduct' )->findAll ();
-		return $productBaseList;
-	}
-	public function findPropertyListWithValue() {
-		global $entityManager;
-		$queryBuilder = $entityManager->createQueryBuilder ();
-		$queryBuilder->select ( array (
-				'
-				hsp.id,
-				hsp.name,
-				hsp.groupCode,
-				hsp.editType,
-				hspv.id as propertyValueId,
-				hspv.value' 
-		) )->from ( 'HShopProperty', 'hsp' )->leftJoin ( 'HShopPropertyValue', 'hspv' )->where ( $queryBuilder->expr ()->eq ( 'hsp.id', 'hspv.propertyId' ) )->orderBy ( 'hsp.id', 'desc' );
-		$query = $queryBuilder->getQuery ();
-		$result = $query->getArrayResult ();
-		return $result;
-		// return $query;
-	}
+	
 	public function findProductProperties($productId = null) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();

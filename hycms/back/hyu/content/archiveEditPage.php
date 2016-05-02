@@ -229,11 +229,6 @@ if (isset($_GET['archiveId'])&&(!empty($_GET['archiveId']))) {
         $(function(){
             });
     </script>
-    <script type="text/javascript">
-	
-
-	
-    </script>
 
 		</div>
 

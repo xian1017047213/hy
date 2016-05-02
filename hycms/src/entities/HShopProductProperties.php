@@ -30,7 +30,7 @@ class HShopProductProperties
     private $productId;
 
     /**
-     * e@ORM\Column(name="modify_time", type="datetime")
+     * @ORM\Column(name="modify_time", type="datetime")
      */
     private $modifyTime;
 

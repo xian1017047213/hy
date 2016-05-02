@@ -77,7 +77,7 @@ class PropertyController {
 	}
 	public function getPropertyTypeList($propertyId = null, $propertyGroupCode = null, $propertyName = null, $propertyStatus = null) {
 		$propretyManager = new PropertyManager ();
-		$propretyList = $propretyManager->findAllPrpertyList ( $propertyId, $propertyGroupCode, $propertyName, $propertyStatus );
+		$propretyList = $propretyManager->findAllPropertyByCondition ( $propertyId, $propertyGroupCode, $propertyName, $propertyStatus );
 		return $propretyList;
 	}
 	public function getPropertyValueDetail($propertyId){
