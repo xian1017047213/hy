@@ -1,4 +1,4 @@
-<?php include_once __DIR__.'/../member/loginveri.php';?>
+<?php include_once __DIR__.'/../user/loginveri.php';?>
 <!DOCTYPE html>
 <html>
 <head>	

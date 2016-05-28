@@ -4,7 +4,7 @@ use hybase\Tools\SystemParameter;
 
 require_once __DIR__.'/../../../src/controller/product/ProductController.php';
 require_once __DIR__.'/../../../src/manager/tools/SystemParameter.php';
-include_once __DIR__.'/../member/loginveri.php';
+include_once __DIR__.'/../user/loginveri.php';
 static $oneGrade='productmanager';
 static $secondGrade='productDetail';
 ?>

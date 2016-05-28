@@ -69,7 +69,7 @@ class UserManager {
 		}
 	}
 	
-	public function findUserList($username = null, $tname = null, $status = null, $phonenum = null, $useremail = null, $type = null) {
+	public function findUserList($startResult=NULL,$resultNum=NULL,$username = null, $tname = null, $status = null, $phonenum = null, $useremail = null, $type = null) {
 		global $entityManager;
 		if ((empty ( $username ))&&(empty ( $tname ))&&(empty ( $status ))&&(empty ( $phonenum ))&&(empty ( $useremail ))&&(empty ( $type ))) {
 			$results = $entityManager->getRepository ( 'HBackUser' )->findAll ();
@@ -100,6 +100,9 @@ class UserManager {
 				->setParameter ( 5, $useremail )
 				->setParameter ( 6, $type );
 		$query = $queryBuilder->getQuery ();
+		$query->setFirstResult(empty($startResult)? 1:$startResult);
+		$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+		$paginator =new Paginator($query,true);
 		$results = $query->getResult ();
 		return $results;
 	}

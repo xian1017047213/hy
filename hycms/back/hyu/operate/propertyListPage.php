@@ -2,9 +2,22 @@
 use hybase\Controller\PropertyController;
 
 require_once __DIR__."/../../../src/controller/operate/PropertyController.php";
-include_once __DIR__.'/../member/loginveri.php';
+include_once __DIR__.'/../user/loginveri.php';
 static $oneGrade='propertymanager';
 static $secondGrade='propertylist';
+$productNum=null;
+$pageNum=null;
+$productController = new ProductController ();
+foreach ( $productController->getValidProductNum() as $number)
+{
+	$productNum=$number[1];
+}
+$pageNum=ceil($productNum / SystemParameter::$recordOfEveryPage) ;
+$startNum=1;
+if (isset ( $_GET ['operPage'] )) {
+	$pageCalculate= new PageCalculate();
+	$startNum=$pageCalculate->calPageNum($_GET['operPage'], $_GET['pageNum'], $_GET['maxPageNum']);
+}
 ?>
 <!DOCTYPE html>
 <html>

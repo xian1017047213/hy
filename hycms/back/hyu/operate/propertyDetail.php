@@ -2,7 +2,7 @@
 use hybase\Controller\PropertyController;
 
 require_once __DIR__."/../../../src/controller/operate/PropertyController.php";
-include_once __DIR__.'/../member/loginveri.php';
+include_once __DIR__.'/../user/loginveri.php';
 static $oneGrade='propertymanager';
 static $secondGrade = 'propertyedit';
 ?>

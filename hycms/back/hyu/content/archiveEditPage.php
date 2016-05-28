@@ -1,7 +1,7 @@
 <?php
 use hybase\Controller\ArchiveController;
 
-include_once __DIR__ . '/../member/loginveri.php';
+include_once __DIR__ . '/../user/loginveri.php';
 require_once __DIR__ . "/../../../src/controller/archive/ArchiveController.php";
 static $oneGrade = 'contentmanager';
 static $secondGrade = 'addcontent';

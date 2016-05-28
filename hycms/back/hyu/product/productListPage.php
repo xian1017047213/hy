@@ -1,11 +1,26 @@
 <?php 
 use hybase\Controller\ProductController;
 use hybase\Tools\SystemParameter;
+use hybase\Tools\PageCalculate;
 
 require_once __DIR__."/../../../src/controller/product/ProductController.php";
-include_once __DIR__.'/../member/loginveri.php';
+require_once __DIR__ . "/../../../src/manager/tools/PageCalculate.php";
+include_once __DIR__.'/../user/loginveri.php';
 static $oneGrade='productmanager';
 static $secondGrade='productmanager';
+$recordNum=null;
+$pageNum=null;
+$productController = new ProductController ();
+foreach ( $productController->getValidProductNum() as $number)
+{
+$recordNum=$number[1]; 
+}
+$pageNum=ceil($recordNum / SystemParameter::$recordOfEveryPage) ;
+$startNum=1;
+if (isset ( $_GET ['operPage'] )) {
+	$pageCalculate= new PageCalculate();
+	$startNum=$pageCalculate->calPageNum($_GET['operPage'], $_GET['pageNum'], $_GET['maxPageNum']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +46,7 @@ static $secondGrade='productmanager';
 <div class="conheader"><span>商品管理</span> </div>
 <div class="c-r-c">
 <div class="ui-block-content ui-block-content-lb">
-<form action="<?php echo $pagebase ?>hyu/product/product.php" method="get" id="productSearch">
+<form action="<?php echo $pagebase ?>hyu/product/" method="get" id="productSearch">
 <input id="searchProduct" name="searchProduct" style="display: none;" value="searchProduct">
 <table>
 	<tbody>
@@ -83,20 +98,22 @@ static $secondGrade='productmanager';
 </div>
 <div class="ui-block">
 <div id="table" class="border-grey ui-table-simple-table">
-<span class="ui-table-title">商品列表</span>
+<span class="ui-table-title">商品列表 </span>
 <div class="ui-table-nav">
 <div class="nav-pager">
-<a href="javascript:void(0);" class="home disabled" title="首页"> 首页 </a>
-	<a href="javascript:void(0);" class="prev disabled" title="上一页">上一页</a>
-	<a href="javascript:void(0);" class="next" title="下一页">下一页</a>
-	<a href="javascript:void(0);" class="end" title="尾页"> 尾页 </a>
-	<input type="text" class="pagenum" value="1">
+	<a id="firstPage" href="<?php echo '?pageNum=1&operPage=firstPage&maxPageNum='.$pageNum;?>" class="firstPage" title="首页"> 首页 </a>
+	<a id="prevPage" href="<?php if ($startNum==1) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=prevPage&maxPageNum='.$pageNum;}?>" class="prevPage" title="上一页">上一页</a>
+	<a id="nextPage" href="<?php if ($startNum==$pageNum) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=nextPage&maxPageNum='.$pageNum;}?>" class="nextPage" title="下一页">下一页</a>
+	<a id="lastPage" href="<?php echo '?pageNum='.$pageNum.'&operPage=lastPage&maxPageNum='.$pageNum;?>" class="lastPage" title="尾页"> 尾页 </a>
+	<input type="text" class="pagenum" name="pageNum" value="1">
+	<input type="hidden" class="operPage" name="operPage" value="">
+	<input type="hidden" class="maxPageNum" name="maxPageNum" value="<?php echo $pageNum ?>">
 	<button type="submit" class="pagego">GO</button>
-	<span class="pagenum" title="总页数">35</span>
-	<span class="recnum" title="总记录数">522</span>
+	<span id="pagenum" class="pagenum" title="总页数">第<?php echo $pageNum ?>页</span>
+	<span id="recnum" class="recnum" title="总记录数">共<?php echo $recordNum ?>条</span>
 	</div>
 </div>
-<table class="table hoverback table-list" cellpadding="0">
+<table class="table hoverback table-list">
 	<thead>
 		<tr>
 			<th class="col-0" width="3%">
@@ -137,13 +154,13 @@ static $secondGrade='productmanager';
 	</thead>
 	<tbody>
 	<?php 
-		$productController=new ProductController();
-		 if (isset($_GET['searchProduct'])) {
-			$productRows=$productController->getAllProductListWithDetailByCondition($_GET['productcode'],$_GET['producttitle'], $_GET['productstatus'], $_GET['product_ct_start'], $_GET['product_ct_end'], $_GET['producttype'], $_GET['product_list_start'], $_GET['product_list_end']);
+		
+		if (isset($_GET['searchProduct'])) {
+			$productRows=$productController->getAllProductListWithDetailByCondition($_GET['productcode'],$_GET['producttitle'], $_GET['productstatus'], $_GET['product_ct_start'], $_GET['product_ct_end'], $_GET['producttype'], $_GET['product_list_start'], $_GET['product_list_end'],(($startNum-1)*(SystemParameter::$recordOfEveryPage)),SystemParameter::$recordOfEveryPage);
 		}else {
-			$productRows=$productController->getAllProductListWithDetail();
+			$productRows=$productController->getAllProductListWithDetail((($startNum-1)*(SystemParameter::$recordOfEveryPage)),SystemParameter::$recordOfEveryPage);
 		} 
-		//$productRows=$productController->getAllProductListWithDetail();
+// 		echo json_encode($productRows);
 		if (isset($productRows)||!empty($productRows)) {
 			$userTable='';
 			foreach ($productRows as $productRow){
@@ -191,14 +208,17 @@ static $secondGrade='productmanager';
 </table>
 <div class="ui-table-nav">
 <div class="nav-pager">
-<a href="javascript:void(0);" class="home disabled" title="首页"> 首页 </a>
-	<a href="javascript:void(0);" class="prev disabled" title="上一页">上一页</a>
-	<a href="javascript:void(0);" class="next" title="下一页">下一页</a>
-	<a href="javascript:void(0);" class="end" title="尾页"> 尾页 </a>
-	<input type="text" class="pagenum" value="1">
+	<a id="firstPage" href="<?php echo '?pageNum=1&operPage=firstPage&maxPageNum='.$pageNum;?>" class="firstPage" title="首页"> 首页 </a>
+	<a id="prevPage" href="<?php if ($startNum==1) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=prevPage&maxPageNum='.$pageNum;}?>" class="prevPage" title="上一页">上一页</a>
+	<a id="nextPage" href="<?php if ($startNum==$pageNum) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=nextPage&maxPageNum='.$pageNum;}?>" class="nextPage" title="下一页">下一页</a>
+	<a id="lastPage" href="<?php echo '?pageNum='.$pageNum.'&operPage=lastPage&maxPageNum='.$pageNum;?>" class="lastPage" title="尾页"> 尾页 </a>
+	<input type="text" class="pagenum" name="pageNum" value="1">
+	<input type="hidden" class="operPage" name="operPage" value="">
+	<input type="hidden" class="maxPageNum" name="maxPageNum" value="<?php echo $pageNum ?>">
 	<button type="submit" class="pagego">GO</button>
-	<span class="pagenum" title="总页数">35</span>
-	<span class="recnum" title="总记录数">522</span></div>
+	<span id="pagenum" class="pagenum" title="总页数">第<?php echo $pageNum ?>页</span>
+	<span id="recnum" class="recnum" title="总记录数">共<?php echo $recordNum ?>条</span>
+	</div>
 </div>
 </div>
 </div>

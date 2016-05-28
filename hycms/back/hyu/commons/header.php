@@ -1,7 +1,7 @@
 <?php 
 use hybase\Controller\UserController;
 include_once 'commonparam.php';
-require_once __DIR__."/../../../src/controller/member/UserController.php";
+require_once __DIR__."/../../../src/controller/system/UserController.php";
 $userController=new UserController();
 $userRows=$userController->getUserList($_SESSION['loginname']);
 ?>
@@ -21,7 +21,7 @@ $userRows=$userController->getUserList($_SESSION['loginname']);
 	</div>
 	<div class="u-d">
 	<span>welcome,<?php echo $username=$_SESSION ['loginname'];?></span>
-	<a href="<?php echo $staticbase;?>hyu/member/logout.php" id="loginout" >退出</a>
+	<a href="<?php echo $staticbase;?>hyu/user/logout.php" id="loginout" >退出</a>
 	<a href="<?php echo ($pagebase.'hyu/system/?pageType=userdetail&userId='. $userRows[0]->getId ());?>>" id="modifyuser" >修改用户信息</a>
 	</div>
 </div>

@@ -344,6 +344,9 @@ class ProductManager {
 				and hsp.type like :type
 				and hsp.listTime between :listStart and :listEnd";
 			$query= $entityManager->createQuery ( $dql );
+			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+			$paginator =new Paginator($query,true);
 			$query->setParameter('delestatus', SystemParameter::$productStatusdelete);
 			$query->setParameter('code', $code);
 			$query->setParameter('title', $title);
@@ -353,9 +356,6 @@ class ProductManager {
 			$query->setParameter('type', $type);
 			$query->setParameter('listStart', $listStart);
 			$query->setParameter('listEnd', $listEnd);
-			$query->setFirstResult(empty($startResult)? 1:$startResult);
-			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
-			$paginator =new Paginator($query,true);
 			$productBaseList = $query->getArrayResult ();
 		}
 		return $productBaseList;

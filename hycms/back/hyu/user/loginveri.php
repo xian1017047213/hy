@@ -1,6 +1,6 @@
 <?php include_once  __DIR__.'/../commons/commonparam.php';?>
 <?php
-$locationurl="location:".$pagebase.'hyu/member';
+$locationurl="location:".$pagebase.'hyu/user';
 session_start();
 if (!isset($_SESSION['loginstatus'])) {
 	header($locationurl);

@@ -4,7 +4,7 @@ use hybase\Tools\SystemParameter;
 
 require_once __DIR__ . "/../../../src/controller/product/ProductController.php";
 include_once __DIR__.'/../commons/commonspages.php';
-include_once __DIR__ . '/../member/loginveri.php';
+include_once __DIR__ . '/../user/loginveri.php';
 
 $productController = new ProductController ();
 if (isset ( $_POST ['operType'] )) {
@@ -146,6 +146,7 @@ if (isset ( $_GET ['operType'] )) {
 	} else {
 		
 	}
-		exit();
+	exit();
 }
+
 ?>

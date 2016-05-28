@@ -4,7 +4,7 @@
 <?php 
 include_once __DIR__.'/hyu/commons/commonspages.php';
 include_once __DIR__.'/hyu/commons/commonparam.php';
-include_once __DIR__.'/hyu/member/loginveri.php';
+include_once __DIR__.'/hyu/user/loginveri.php';
 //ini_set('session.gc_maxlifetime', 3600);
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

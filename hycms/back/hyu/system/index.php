@@ -11,4 +11,7 @@ if (isset ( $_GET ['pageType'] )) {
 	}
 	
 }
+if (! isset ( $_POST ['pageType'] ) && ! isset ( $_GET ['pageType'] )) {
+	include_once 'userListPage.php';
+}
 ?>

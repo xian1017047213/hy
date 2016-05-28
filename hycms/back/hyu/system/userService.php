@@ -1,8 +1,8 @@
 <?php
 use hybase\Controller\UserController;
 
-require_once __DIR__ . "/../../../src/controller/member/UserController.php";
-include_once __DIR__ . '/../member/loginveri.php';
+require_once __DIR__ . "/../../../src/controller/system/UserController.php";
+include_once __DIR__ . '/../user/loginveri.php';
 include_once __DIR__ . '/../commons/commonparam.php';
 static $oneGrade = 'authmanager';
 static $secondGrade = 'usermanager';

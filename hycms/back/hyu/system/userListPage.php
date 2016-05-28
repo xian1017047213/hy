@@ -1,10 +1,24 @@
 <?php 
 use hybase\Controller\UserController;
+use hybase\Tools\SystemParameter;
+use hybase\Tools\PageCalculate;
 
-require_once __DIR__."/../../../src/controller/member/UserController.php";
-include_once __DIR__.'/../member/loginveri.php';
+require_once __DIR__."/../../../src/controller/system/UserController.php";
+require_once __DIR__ . "/../../../src/manager/tools/PageCalculate.php";
+require_once __DIR__ . '/../../../src/manager/tools/SystemParameter.php';
+include_once __DIR__.'/../user/loginveri.php';
 static $oneGrade='authmanager';
 static $secondGrade='usermanager';
+$recordNum=null;
+$pageNum=null;
+$userController=new UserController();
+$recordNum=sizeof($userController->getUserList())>0 ? sizeof($userController->getUserList()):0;
+$pageNum=ceil($recordNum / SystemParameter::$recordOfEveryPage) ;
+$startNum=1;
+if (isset ( $_GET ['operPage'] )) {
+	$pageCalculate= new PageCalculate();
+	$startNum=$pageCalculate->calPageNum($_GET['operPage'], $_GET['pageNum'], $_GET['maxPageNum']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,14 +84,16 @@ static $secondGrade='usermanager';
 <span class="ui-table-title">用户列表</span>
 <div class="ui-table-nav">
 <div class="nav-pager">
-<a href="javascript:void(0);" class="home disabled" title="首页"> 首页 </a>
-	<a href="javascript:void(0);" class="prev disabled" title="上一页">上一页</a>
-	<a href="javascript:void(0);" class="next" title="下一页">下一页</a>
-	<a href="javascript:void(0);" class="end" title="尾页"> 尾页 </a>
-	<input type="text" class="pagenum" value="1">
+	<a id="firstPage" href="<?php echo '?pageNum=1&operPage=firstPage&maxPageNum='.$pageNum;?>" class="firstPage" title="首页"> 首页 </a>
+	<a id="prevPage" href="<?php if ($startNum==1) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=prevPage&maxPageNum='.$pageNum;}?>" class="prevPage" title="上一页">上一页</a>
+	<a id="nextPage" href="<?php if ($startNum==$pageNum) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=nextPage&maxPageNum='.$pageNum;}?>" class="nextPage" title="下一页">下一页</a>
+	<a id="lastPage" href="<?php echo '?pageNum='.$pageNum.'&operPage=lastPage&maxPageNum='.$pageNum;?>" class="lastPage" title="尾页"> 尾页 </a>
+	<input type="text" class="pagenum" name="pageNum" value="1">
+	<input type="hidden" class="operPage" name="operPage" value="">
+	<input type="hidden" class="maxPageNum" name="maxPageNum" value="<?php echo $pageNum ?>">
 	<button type="submit" class="pagego">GO</button>
-	<span class="pagenum" title="总页数">35</span>
-	<span class="recnum" title="总记录数">522</span>
+	<span id="pagenum" class="pagenum" title="总页数">第<?php echo $pageNum ?>页</span>
+	<span id="recnum" class="recnum" title="总记录数">共<?php echo $recordNum ?>条</span>
 	</div>
 </div>
 <table class="table hoverback table-list" cellpadding="0">
@@ -113,11 +129,11 @@ static $secondGrade='usermanager';
 		</tr>
 	</thead>
 	<tbody>
-	<?php $userController=new UserController();
+	<?php 
 	if (isset($_GET['searchuser'])) {
-		$userRows=$userController->getUserList($_GET['username'],$_GET['tname'],$_GET['userstatus'],$_GET['phonenum'],$_GET['useremail'],$_GET['type']);
+		$userRows=$userController->getUserList((($startNum-1)*(SystemParameter::$recordOfEveryPage)),SystemParameter::$recordOfEveryPage,$_GET['username'],$_GET['tname'],$_GET['userstatus'],$_GET['phonenum'],$_GET['useremail'],$_GET['type']);
 	}else {
-		$userRows=$userController->getUserList();
+		$userRows=$userController->getUserList((($startNum-1)*(SystemParameter::$recordOfEveryPage)),SystemParameter::$recordOfEveryPage);
 	}
 	if (isset($userRows)) {
 		$userTable='';
@@ -189,14 +205,17 @@ static $secondGrade='usermanager';
 </table>
 <div class="ui-table-nav">
 <div class="nav-pager">
-<a href="javascript:void(0);" class="home disabled" title="首页"> 首页 </a>
-	<a href="javascript:void(0);" class="prev disabled" title="上一页">上一页</a>
-	<a href="javascript:void(0);" class="next" title="下一页">下一页</a>
-	<a href="javascript:void(0);" class="end" title="尾页"> 尾页 </a>
-	<input type="text" class="pagenum" value="1">
+	<a id="firstPage" href="<?php echo '?pageNum=1&operPage=firstPage&maxPageNum='.$pageNum;?>" class="firstPage" title="首页"> 首页 </a>
+	<a id="prevPage" href="<?php if ($startNum==1) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=prevPage&maxPageNum='.$pageNum;}?>" class="prevPage" title="上一页">上一页</a>
+	<a id="nextPage" href="<?php if ($startNum==$pageNum) {echo 'javascript:void(0);';}else{echo '?pageNum='.$startNum.'&operPage=nextPage&maxPageNum='.$pageNum;}?>" class="nextPage" title="下一页">下一页</a>
+	<a id="lastPage" href="<?php echo '?pageNum='.$pageNum.'&operPage=lastPage&maxPageNum='.$pageNum;?>" class="lastPage" title="尾页"> 尾页 </a>
+	<input type="text" class="pagenum" name="pageNum" value="1">
+	<input type="hidden" class="operPage" name="operPage" value="">
+	<input type="hidden" class="maxPageNum" name="maxPageNum" value="<?php echo $pageNum ?>">
 	<button type="submit" class="pagego">GO</button>
-	<span class="pagenum" title="总页数">第1页</span>
-	<span class="recnum" title="总记录数">每页35条</span></div>
+	<span id="pagenum" class="pagenum" title="总页数">第<?php echo $pageNum ?>页</span>
+	<span id="recnum" class="recnum" title="总记录数">共<?php echo $recordNum ?>条</span>
+	</div>
 </div>
 </div>
 </div>

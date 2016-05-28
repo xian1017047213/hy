@@ -4,8 +4,8 @@ namespace hybase\Controller;
 use hybase\Manager\UserManager;
 use hybase\Tools\SystemParameter;
 
-require_once  __DIR__ .'/../../manager/member/UserManager.php';
-require_once  __DIR__ .'/../../manager/tools/SystemParameter.php';
+require_once  __DIR__ .'/../../manager/system/UserManager.php';
+require_once __DIR__ . '/../../manager/tools/SystemParameter.php';
 
 class UserController{
 	/*
@@ -123,9 +123,9 @@ class UserController{
 	 * @param 邮箱 $useremail
 	 * @param 状态 $type
 	 */
-	public function getUserList($username=null,$tname=null,$status=null,$phonenum=null,$useremail=null,$type=null){
+	public function getUserList($startResult=NULL,$resultNum=NULL,$username=null,$tname=null,$status=null,$phonenum=null,$useremail=null,$type=null){
 		$userManager=new UserManager();
-		$userRows=$userManager->findUserList($username,$tname,$status,$phonenum,$useremail,$type);
+		$userRows=$userManager->findUserList($startResult=NULL,$resultNum=NULL,$username,$tname,$status,$phonenum,$useremail,$type);
 		return $userRows;
 	}
 	/**
