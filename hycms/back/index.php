@@ -20,7 +20,6 @@ include_once __DIR__.'/hyu/user/loginveri.php';
 		</div>
 		
 	</div>
-	<script type="text/javascript"
-		src="<?php echo $staticbase?>scripts/commons.js"></script>
+	<!-- <script type="text/javascript" src="<?php echo $staticbase;?>scripts/commons.js"></script> -->
 </body>
 </html>

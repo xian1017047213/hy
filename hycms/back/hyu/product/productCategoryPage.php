@@ -180,6 +180,6 @@
 </div>
 </div>
 </body>
-<script type="text/javascript" src="../../scripts/commons.js"></script>
+<script type="text/javascript" src="<?php echo $pagebase; ?>scripts/commons.js"></script>
 
 </html>

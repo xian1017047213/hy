@@ -4,8 +4,11 @@ namespace hybase\Manager;
 
 use hybase\Repository;
 use hybase\Repository\UserRespository;
+use hybase\Tools\SystemParameter;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 require_once __DIR__ . '/../datamanager/database.php';
+require_once __DIR__ . '/../tools/SystemParameter.php';
 require_once __DIR__ .'/../repository/UserRespository.php';
 class UserManager {
 	function __construct() {

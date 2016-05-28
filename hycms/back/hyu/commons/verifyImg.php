@@ -1,36 +1,11 @@
-<?php 
-$width = 100; //设置图片宽和高 
-$height = 40; 
-$fontsize=20;
-$str = Array(); //用来存储随机码 
-$string = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz123456789";//随机挑选其中4个字符，也可以选择更多，注意循环的时候加上，宽度适当调整 
-for($i = 0;$i < 4;$i++){ 
-$str[$i] = $string[rand(0,56)]; 
-$vcode .= $str[$i]; 
-} 
-session_start(); //启用超全局变量session 
-$_SESSION["vcode"] = strtolower($vcode); 
-$image = imagecreatetruecolor($width,$height); 
-$widthhite = imagecolorallocate($image,255,255,255); //第一次调用设置背景色 
-$black = imagecolorallocate($image,200,200,200); //边框颜色 
-imagefilledrectangle($image,0,0,$width,$height,$widthhite); //画一矩形填充 
-imagerectangle($image,0,0,$width-1,$height-1,$black); //画一矩形框 
-//生成雪花背景 
-//  for($i = 1;$i < 200;$i++){ 
-// $x = mt_rand(1,$width-9); 
-// $y = mt_rand(1,$height-9); 
-// $color = imagecolorallocate($image,mt_rand(200,255),mt_rand(200,255),mt_rand(200,255)); 
-// imagechar($image,1,$x,$y,"*",$color); 
-// }  
-//将验证码写入图案 
-for($i = 0;$i < count($str);$i++){ 
-$x = 13 + $i * ($width - 15)/4; 
-$y = mt_rand($fontsize,$height); 
-$color = imagecolorallocate($image,mt_rand(0,225),mt_rand(0,150),mt_rand(0,225)); 
-imagettftext($image, $fontsize, rand(13,20), $x, $y, $color,'../../css/font/msyh.ttf', $str[$i]);
-}  
+<?php
+use hybase\Tools\VerifiCodeImg;
+require_once __DIR__ . '/../../../src/manager/tools/VerifiCodeImg.php';
 
-ob_clean();
+$VerifiCodeImg = new VerifiCodeImg ();
+
+$fontStyle='../../css/font/msyh.ttf';
+$image=$VerifiCodeImg->verfiCodeImg($fontStyle);
 header ( 'Content-type: image/jpeg' );
 imagejpeg($image);
 imagedestroy($image);

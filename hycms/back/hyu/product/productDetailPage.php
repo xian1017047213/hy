@@ -134,5 +134,5 @@ if (isset ( $_GET ['productId'] )) {
 	</div>
 
 </body>
-<script type="text/javascript" src="../../scripts/commons.js"></script>
+<script type="text/javascript" src="<?php echo $staticbase?>scripts/commons.js"></script>
 </html>

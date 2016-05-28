@@ -3,10 +3,10 @@ use hybase\Controller\UserController;
 use hybase\Tools\SystemParameter;
 use hybase\Tools\PageCalculate;
 
-require_once __DIR__."/../../../src/controller/system/UserController.php";
-require_once __DIR__ . "/../../../src/manager/tools/PageCalculate.php";
-require_once __DIR__ . '/../../../src/manager/tools/SystemParameter.php';
-include_once __DIR__.'/../user/loginveri.php';
+require_once __DIR__."/../../../../src/controller/system/UserController.php";
+require_once __DIR__ . "/../../../../src/manager/tools/PageCalculate.php";
+require_once __DIR__ . '/../../../../src/manager/tools/SystemParameter.php';
+include_once __DIR__.'/../../user/loginveri.php';
 static $oneGrade='authmanager';
 static $secondGrade='usermanager';
 $recordNum=null;
@@ -23,12 +23,12 @@ if (isset ( $_GET ['operPage'] )) {
 <!DOCTYPE html>
 <html>
 <head>	
-<?php include_once __DIR__.'/../commons/commonspages.php';?>
+<?php include_once __DIR__.'/../../commons/commonspages.php';?>
 </head>
 <body>
-<?php include_once __DIR__.'/../commons/header.php';?>
+<?php include_once __DIR__.'/../../commons/header.php';?>
 <div class="content">
-<?php include_once __DIR__.'/systemLeftNav.php';?>
+<?php include_once __DIR__.'/../systemLeftNav.php';?>
 <div class="conright">
 <div class="conheader">
 <span>用户管理</span>
@@ -222,6 +222,6 @@ if (isset ( $_GET ['operPage'] )) {
 </div>
 </div>
 </body>
-<script type="text/javascript" src="../../scripts/commons.js"></script>
+<script type="text/javascript" src="<?php echo $staticbase?>scripts/commons.js"></script>
 
 </html>

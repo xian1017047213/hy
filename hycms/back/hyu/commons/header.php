@@ -8,7 +8,9 @@ $userRows=$userController->getUserList($_SESSION['loginname']);
 
 <div class="header">
 	<div class="logo">
+	<a href="<?php echo $staticbase;?>">	
 	<img alt="" src="<?php echo $staticbase;?>images/logo.png">
+	</a>
 	</div>
 	<div class="nav">
 	<ul>

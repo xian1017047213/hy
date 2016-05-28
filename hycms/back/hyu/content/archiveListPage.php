@@ -130,7 +130,6 @@ if (isset ( $_GET ['operPage'] )) {
 		}else {
 			$archiveRows=$archiveController->getArchiveList(NULL,NULL,NULL,NULL ,NULL,NULL,NULL,NULL,NULL,(($startNum-1)*(SystemParameter::$recordOfEveryPage)),SystemParameter::$recordOfEveryPage);
 		} 
-		//$archiveRows=$archiveController->getArchiveList();
 		if (isset($archiveRows)||!empty($archiveRows)) {
 			$archiveTable='';
 			foreach ($archiveRows as $archiveRow){
@@ -197,5 +196,5 @@ if (isset ( $_GET ['operPage'] )) {
 </div>
 </div>
 </body>
-<script type="text/javascript" src="../../scripts/commons.js"></script>
+<script type="text/javascript" src="<?php echo $pagebase; ?>scripts/commons.js"></script>
 </html>
