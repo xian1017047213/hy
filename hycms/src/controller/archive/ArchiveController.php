@@ -4,39 +4,21 @@ namespace hybase\Controller;
 
 use hybase\Manager\ArchiveManager;
 use hybase\Tools\DirectoryAndFileOper;
+use hybase\Tools\SystemParameter;
 
 require_once __DIR__ . '/../../manager/archive/ArchiveManager.php';
 require_once __DIR__ . '/../../manager/tools/DirectoryAndFileOper.php';
+require_once __DIR__ . '/../../manager/tools/SystemParameter.php';
 class ArchiveController {
-	/*
-	 * html默认文件路径
-	 */
-	//public static $htmlPath=$_SERVER['DOCUMENT_ROOT'].'/html/';
-	/*
-	 * 文件类型
-	 */
-	public static $fileType='html';
-	/*
-	 * 新建文章
-	 */
-	public static $newArchive=1;
-	/*
-	 * 已发布文章
-	 */
-	public static $publishedArchive=2;
-	/*
-	 * 删除文章
-	 */
-	public static $deletedArchive=3;
 	
 	public function __construct() {
 		// print "In BaseClass constructor\n";
 	}
 	public function archiveStatusToString($archiveStatus){
-		if ($archiveStatus==self::$newArchive) {
+		if ($archiveStatus==SystemParameter::$newArchive) {
 			return '未发布';
 		}
-		if ($archiveStatus==self::$publishedArchive) {
+		if ($archiveStatus==SystemParameter::$publishedArchive) {
 			return '已发布';
 		}
 	}
@@ -77,9 +59,9 @@ class ArchiveController {
 		}
 		return $archiveManager->saveArchiveDetail($archiveId,$code, $title,$litpic, $description, $archivebody, $source, $writer);
 	}
-	public function getArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status=NULL , $createStart=NULL,$createEnd=NULL,$archivebody = NULL, $source = NULL, $writer = NULL){
+	public function getArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status=NULL , $createStart=NULL,$createEnd=NULL,$archivebody = NULL, $source = NULL, $writer = NULL,$startResult=NULL,$resultNum=NULL){
 		$archiveManager = new ArchiveManager();
-		return $archiveManager->findArchiveList($archiveId, $code, $title, $status , $createStart,$createEnd,$archivebody, $source, $writer);
+		return $archiveManager->findArchiveList($archiveId, $code, $title, $status , $createStart,$createEnd,$archivebody, $source, $writer,$startResult,$resultNum);
 	}
 	/**
 	 * 发布文件生成html静态文件
@@ -96,10 +78,10 @@ class ArchiveController {
 			$dateHtmlName=time();
 			$archiveContent=$contentResult->getContent();
 			$directoryAndFileOper->createFileDirectory($htmlPathCreate);
-			$directoryAndFileOper->createFile($htmlPathCreate, $dateHtmlName, $archiveContent, self::$fileType);
-			$archiveStaticUrl=$htmlPathCreate.$dateHtmlName.'.'.self::$fileType;
+			$directoryAndFileOper->createFile($htmlPathCreate, $dateHtmlName, $archiveContent, SystemParameter::$fileType);
+			$archiveStaticUrl=$htmlPathCreate.$dateHtmlName.'.'.SystemParameter::$fileType;
 			$archiveManager->updateArchiveContentStaticUrl($archiveId, $archiveStaticUrl);
-			$archiveManager->updateArchiveStatus($archiveId, self::$publishedArchive,$dateHtmlName);
+			$archiveManager->updateArchiveStatus($archiveId, SystemParameter::$publishedArchive,$dateHtmlName);
 			return true;
 		}
 		return FALSE;
@@ -115,7 +97,7 @@ class ArchiveController {
 		$headResult= $archiveManager->findArchiveHead($archiveId);
 		if (sizeof($headResult)>0){
 			$dateHtmlName='';
-			$archiveManager->updateArchiveStatus($archiveId, self::$newArchive,$dateHtmlName);
+			$archiveManager->updateArchiveStatus($archiveId, SystemParameter::$newArchive,$dateHtmlName);
 			return true;
 		}
 		return FALSE;
@@ -131,7 +113,7 @@ class ArchiveController {
 		$headResult= $archiveManager->findArchiveHead($archiveId);
 		if (sizeof($headResult)>0){
 			$dateHtmlName='';
-			$archiveManager->updateArchiveStatus($archiveId, self::$deletedArchive,$dateHtmlName);
+			$archiveManager->updateArchiveStatus($archiveId, SystemParameter::$deletedArchive,$dateHtmlName);
 			return true;
 		}
 		return FALSE;
@@ -155,6 +137,10 @@ class ArchiveController {
 		}
 		return true;
 	}
-	
+	public function getValidArchiveNum(){
+		$archiveManager = new ArchiveManager();
+		$result=$archiveManager->findNumberOfValidArchive();
+		return $result;
+	}
 }
 ?>

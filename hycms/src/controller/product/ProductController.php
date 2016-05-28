@@ -43,6 +43,11 @@ class ProductController {
 		}
 		return '非定义状态';
 	}
+	public function getValidProductNum(){
+		$productManager = new ProductManager ();
+		$result=$productManager->findNumberOfValidProduct();
+		return $result;
+	}
 	
 	public function operProductStatusToString($productStatus) {
 		if ($productStatus == SystemParameter::$productStatusIni || $productStatus == SystemParameter::$productStatusOut) {
@@ -89,9 +94,9 @@ class ProductController {
 		$productList = $productManager->findAllProductList ();
 		return $productList;
 	}
-	public function getAllProductListWithDetail() {
+	public function getAllProductListWithDetail($startResult=NULL,$resultNum=NULL) {
 		$productManager = new ProductManager ();
-		$productListWithDetail = $productManager->findAllProductListWithDetail ();
+		$productListWithDetail = $productManager->findAllProductListWithDetail ($startResult,$resultNum);
 		return $productListWithDetail;
 	}
 	public function getProductById($productId){
@@ -104,9 +109,9 @@ class ProductController {
 		$productDetail = $productManager->findProductDetailByProductId($productId);
 		return $productDetail;
 	}
-	public function getAllProductListWithDetailByCondition($code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd) {
+	public function getAllProductListWithDetailByCondition($code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd,$startResult=NULL,$resultNum=NULL) {
 		$productManager = new ProductManager ();
-		$productListWithDetail = $productManager->findAllProductListWithDetailByCondition ( $code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd );
+		$productListWithDetail = $productManager->findAllProductListWithDetailByCondition ( $code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd,$startResult,$resultNum );
 		return $productListWithDetail;
 	}
 	

@@ -1,4 +1,4 @@
-div,a,ul,li,span,body{
+div,a,ul,li,span,body,dl,dt,dd{
 /* 	overflow-y:hidden; */
 	text-decoration: none;
 	font-family: 'Open Sans','Microsoft YaHei',"Heiti SC",'STHeiti Light','PMingLiU', sans-serif;
@@ -47,4 +47,54 @@ div,a,ul,li,span,body{
 .navlist ul li:HOVER{
 	border-bottom:3px solid #28A7E1;
 	
+}
+.suspend dl {
+	width: 120px;
+	height: 198px;
+	border-radius: 25px 0 0 25px;
+	padding-left: 40px;
+	box-shadow: 0 0 5px #e4e8ec;
+}
+
+.suspend dl dt {
+	width: 40px;
+	height: 198px;
+	background: url(../images/suspend.png);
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.suspend dl dd {
+	
+}
+
+.suspend dl dd.suspendQQ {
+	width: 120px;
+	height: 85px;
+	background: #ffffff;
+}
+
+.suspend dl dd.suspendQQ a {
+	width: 120px;
+	height: 85px;
+	display: block;
+	background: url(../images/suspend.png) -40px 0;
+	overflow: hidden;
+}
+
+.suspend dl dd.suspendTel {
+	width: 120px;
+	height: 112px;
+	background: #ffffff;
+	border-top: 1px solid #e4e8ec;
+}
+
+.suspend dl dd.suspendTel a {
+	width: 120px;
+	height: 112px;
+	display: block;
+	background: url(../images/suspend.png) -40px -86px;
+	overflow: hidden;
 }

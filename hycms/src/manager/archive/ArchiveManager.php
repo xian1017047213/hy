@@ -2,7 +2,11 @@
 
 namespace hybase\Manager;
 
+use hybase\Tools\SystemParameter;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 require_once __DIR__ . '/../datamanager/database.php';
+require_once __DIR__ . '/../tools/SystemParameter.php';
 class ArchiveManager {
 	/*
 	 * 默认文章状态为新建状态
@@ -75,7 +79,7 @@ class ArchiveManager {
 			return "服务器处理异常！";
 		}
 	}
-	public function findArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status = NULL, $createStart = NULL, $createEnd = NULL, $archivebody = NULL, $source = NULL, $writer = NULL) {
+	public function findArchiveList($archiveId = NULL, $code = NULL, $title = NULL, $status = NULL, $createStart = NULL, $createEnd = NULL, $archivebody = NULL, $source = NULL, $writer = NULL,$startResult=NULL,$resultNum=NULL) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();
 		if ((empty ( $status )) && (empty ( $archiveId )) && (empty ( $code )) && (empty ( $title )) && (empty ( $createStart )) && (empty ( $createEnd )) && (empty ( $archivebody )) && (empty ( $source )) && (empty ( $writer ))) {
@@ -87,6 +91,9 @@ class ArchiveManager {
 			->orderBy ( 'hah.id', 'desc' )
 			->setParameter ( 1, 3 );
 			$query = $queryBuilder->getQuery ();
+			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+			$paginator =new Paginator($query,true);
 			$results = $query->getResult ();
 			return $results;
 		}
@@ -171,6 +178,13 @@ class ArchiveManager {
 		) );
 		}
 		return $result;
+	}
+	public function findNumberOfValidArchive(){
+		global $entityManager;
+		$query = $entityManager->createQuery('SELECT count(hah) FROM HArchiveHead hah where hah.status !=:delestatus');
+		$query-> setParameter('delestatus', SystemParameter:: $deletedArchive);
+		$archiveNum = $query->getResult() ;
+		return $archiveNum;
 	}
 }
 

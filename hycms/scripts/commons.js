@@ -15,3 +15,14 @@ $(function(){
 		$(".blank-block").css("height",(document.body.scrollHeight-document.body.clientHeight));
 	}
 });
+
+$(function(){
+	$(".suspend").mouseover(function() {
+        $(this).stop();
+        $(this).animate({width: 160}, 400);
+    });
+    $(".suspend").mouseout(function() {
+        $(this).stop();
+        $(this).animate({width: 40}, 400);
+    });
+});

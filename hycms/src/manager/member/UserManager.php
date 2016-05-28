@@ -43,6 +43,12 @@ class UserManager {
 			return "服务器处理异常！";
 		}
 	}
+	public function findNumberOfValidProduct(){
+		global $entityManager;
+		$query = $entityManager->createQuery('SELECT count(hbu) FROM HBackUser hbu');
+		$productNum = $query->getResult() ;
+		return $productNum;
+	}
 	public function findPwdByUsername($username, $password) {
 		try {
 		global $entityManager;

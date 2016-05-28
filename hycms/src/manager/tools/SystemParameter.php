@@ -76,5 +76,48 @@ class SystemParameter{
 	 * 输入文本框
 	 */
 	public static $editTypeWithInputtext=4;
-	
+	/*
+	 * 列表每页记录数
+	 */
+	public static $recordOfEveryPage=20;
+	/*
+	 * 系统用户类型
+	 */
+	public static $sysUserType = 1;
+	/*
+	 * 普通用户类型
+	 */
+	public static $genUserType = 2;
+	/*
+	 * 有效用户
+	 */
+	public static $effectUserStatus = 1;
+	/*
+	 * 无效用户
+	 */
+	public static $invalidUserStatus=2;
+	/*
+	 * 操作用户状态为有效
+	 */
+	public static $operValidStatus='valid';
+	/*
+	 * 操作用户状态为无效
+	 */
+	public static $operInvalidStatus='invalid';
+	/*
+	 * 首页
+	 */
+	public static $pageOfFirst='firstPage';
+	/*
+	 * 上一页
+	 */
+	public static $pageOfPrev='prevPage';
+	/*
+	 * 下一页
+	 */
+	public static $pageOfNext='nextPage';
+	/*
+	 * 最后一页
+	 */
+	public static $pageOfLast='lastPage';
 }

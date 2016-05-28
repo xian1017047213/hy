@@ -2,8 +2,10 @@
 namespace hybase\Controller;
 
 use hybase\Manager\UserManager;
+use hybase\Tools\SystemParameter;
 
 require_once  __DIR__ .'/../../manager/member/UserManager.php';
+require_once  __DIR__ .'/../../manager/tools/SystemParameter.php';
 
 class UserController{
 	/*
@@ -38,9 +40,9 @@ class UserController{
 	 * 转变用户类型为文字
 	 */
 	public function userTypeToString($userType){
-		if ($userType==($this::$sysUserType)) {
+		if ($userType==(SystemParameter::$sysUserType)) {
 			return $userType='系统用户';
-		}elseif ($userType==($this::$genUserType)){
+		}elseif ($userType==(SystemParameter::$genUserType)){
 			return $userType='普通用户';
 		}else {
 			return $userType='其他用户';
@@ -51,9 +53,9 @@ class UserController{
 	 * 转变用户状态为文字
 	 */
 	public function userStatusToString($userStatus) {
-		if ($userStatus == (self::$invalidUserStatus)) {
+		if ($userStatus == (SystemParameter::$invalidUserStatus)) {
 			return $userStatus = '无效';
-		} elseif ($userStatus == (self::$effectUserStatus)) {
+		} elseif ($userStatus == (SystemParameter::$effectUserStatus)) {
 			return $userStatus = '有效';
 		} else {
 			return $userStatus = '';
@@ -63,19 +65,19 @@ class UserController{
 	 * 转变用户可操作状态为文字
 	 */
 	public function userOperStatusToString($userStatus) {
-		if ($userStatus== (self::$invalidUserStatus)) {
+		if ($userStatus== (SystemParameter::$invalidUserStatus)) {
 			return $operaUserStatus = '启用';
-		} elseif ($userStatus== (self::$effectUserStatus)) {
+		} elseif ($userStatus== (SystemParameter::$effectUserStatus)) {
 			return $operaUserStatus = '禁用';
 		} else {
 			return $operaUserStatus = '';
 		}
 	}
 	public function userOperStatus($userStatus){
-		if ($userStatus== (self::$invalidUserStatus)) {
-			return $operaUserStatus = self::$operValidStatus;
-		} elseif ($userStatus== (self::$effectUserStatus)) {
-			return $operaUserStatus = self::$operInvalidStatus;
+		if ($userStatus== (SystemParameter::$invalidUserStatus)) {
+			return $operaUserStatus = SystemParameter::$operValidStatus;
+		} elseif ($userStatus== (SystemParameter::$effectUserStatus)) {
+			return $operaUserStatus = SystemParameter::$operInvalidStatus;
 		} else {
 			return $operaUserStatus = '';
 		}
@@ -100,11 +102,11 @@ class UserController{
 	}
 	public function changeUserStatus($userId,$operstatus){
 		try {
-			if ($operstatus==self::$operValidStatus) {
-				$userstatus=self::$effectUserStatus;
+			if ($operstatus==SystemParameter::$operValidStatus) {
+				$userstatus=SystemParameter::$effectUserStatus;
 			}
-		if ($operstatus==self::$operInvalidStatus) {
-				$userstatus=self::$invalidUserStatus;
+		if ($operstatus==SystemParameter::$operInvalidStatus) {
+				$userstatus=SystemParameter::$invalidUserStatus;
 			}
 			$userManager = new UserManager ();
 			$userManager->changeUserStatus($userId, $userstatus);

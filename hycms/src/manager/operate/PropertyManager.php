@@ -207,26 +207,5 @@ class PropertyManager {
 				//return $query;
 	
 	}
-	/*
-	 * -----------------------------------------------------------------------------------------------
-	 */
 	
-	
-	
-	public function findProductProperties($productId = null) {
-		global $entityManager;
-		$queryBuilder = $entityManager->createQueryBuilder ();
-		$queryBuilder->select ( array (
-				'
-				hspp.id,
-				hspp.productId,
-				hspp.propertyId,
-				hspp.propertyValueId,
-				hspp.propertyValue,
-				hsp.editType' 
-		) )->from ( 'HShopProductProperties', 'hspp' )->leftJoin ( 'HShopProperty', 'hsp', 'WITH', 'hsp.id=hspp.propertyId' )->andWhere ( $queryBuilder->expr ()->eq ( 'hspp.productId', '?1' ) )->orderBy ( 'hsp.id', 'desc' )->setParameter ( 1, $productId );
-		$query = $queryBuilder->getQuery ();
-		$result = $query->getArrayResult ();
-		return $result;
-	}
 }

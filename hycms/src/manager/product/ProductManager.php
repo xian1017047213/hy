@@ -3,6 +3,7 @@
 namespace hybase\Manager;
 
 use hybase\Tools\SystemParameter;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 require_once __DIR__ . '/../datamanager/database.php';
 require_once __DIR__ . '/../tools/SystemParameter.php';
@@ -218,6 +219,10 @@ class ProductManager {
 		try {
 			$product=$entityManager->find('HShopProduct', $productId);
 			$product->setStatus($productStatus);
+			if ($productStatus==SystemParameter::$productStatusList) {
+				$product->setListTime(new \DateTime('now'));;
+			}
+			$product->setModifyTime(new \DateTime('now'));
 			$entityManager->flush();
 			return true;
 		} catch (Exception $e) {
@@ -229,22 +234,15 @@ class ProductManager {
 		$productBaseList = $entityManager->getRepository ( 'HShopProduct' )->findAll ();
 		return $productBaseList;
 	}
-	public function findAllProductListWithDetail() {
+	public function findNumberOfValidProduct(){
 		global $entityManager;
-		/*
-		 * $dql = "select
-		 * hsp.id,
-		 * hsp.code,
-		 * hspd.title,
-		 * hsp.createTime,
-		 * hsp.modifyTime,
-		 * hsp.industryId,
-		 * hsp.status,
-		 * hsp.listTime,
-		 * hsp.type,
-		 * hspd.activeBeginTime
-		 * FROM HShopProduct hsp JOIN HShopProductDetail hspd Where hsp.id=hspd.productId";
-		 */
+		$query = $entityManager->createQuery('SELECT count(hsp) FROM HShopProduct hsp where hsp.status !=:delestatus');
+		$query-> setParameter('delestatus', SystemParameter::$productStatusdelete);
+		$productNum = $query->getResult() ;
+		return $productNum;
+	}
+	public function findAllProductListWithDetail($startResult=NULL,$resultNum=NULL) {
+		global $entityManager;
 		$dql = "select
 				hsp.id,
 				hsp.code,
@@ -262,12 +260,14 @@ class ProductManager {
 				LEFT JOIN HShopIndustry hsi Where hsi.id=hsp.industryId and hsp.status !=:delestatus
 				where  hsp.status !=:delestatus ";
 		$query= $entityManager->createQuery ( $dql );
+		$query->setFirstResult(empty($startResult)? 1:$startResult);
+		$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+		$paginator =new Paginator($query,true);
 		$query->setParameter('delestatus', SystemParameter::$productStatusdelete);
 		$productBaseList = $query->getArrayResult ();
-		// $productBaseList=$entityManager->getRepository ( 'HShopProduct' )->findAll ();
 		return $productBaseList;
 	}
-	public function findAllProductListWithDetailByCondition($code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd) {
+	public function findAllProductListWithDetailByCondition($code, $title, $status, $createStart, $createEnd, $type, $listStart, $listEnd,$startResult=NULL,$resultNum=NULL) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();
 		$code = '%' . $code . '%';
@@ -280,14 +280,8 @@ class ProductManager {
 			$createEnd = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $createEnd );
 		}
 		$type = '%' . $type . '%';
-		$listStart = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $listStart );
-		if (empty ( $listEnd )) {
-			$listEnd = new \DateTime ( "now" );
-		} else {
-			$listEnd = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $createEnd );
-		}
-		$queryBuilder->select ( array (
-				'
+		if (empty($listStart)&&empty($listEnd)) {
+			$dql = "select
 				hsp.id,
 				hsp.code,
 				hspd.title,
@@ -297,11 +291,73 @@ class ProductManager {
 				hsp.status,
 				hsp.listTime,
 				hsp.type,
-				hspd.activeBeginTime' 
-		) )->from ( 'HShopProduct', 'hsp' )->join ( 'HShopProductDetail', 'hspd' )->where ( $queryBuilder->expr ()->andX ( $queryBuilder->expr ()->eq ( 'hsp.id', 'hspd.productId' ), $queryBuilder->expr ()->like ( 'hsp.code', '?1' ), $queryBuilder->expr ()->like ( 'hspd.title', '?2' ), $queryBuilder->expr ()->like ( 'hsp.status', '?3' ), $queryBuilder->expr ()->between ( 'hsp.createTime', '?4', '?5' ), $queryBuilder->expr ()->like ( 'hsp.type', '?6' ), $queryBuilder->expr ()->between ( 'hsp.listTime', '?7', '?8' ) ) )->orderBy ( 'hsp.id', 'desc' )->setParameter ( 1, $code )->setParameter ( 2, $title )->setParameter ( 3, $status )->setParameter ( 4, $createStart )->setParameter ( 5, $createEnd )->setParameter ( 6, $type )->setParameter ( 7, $listStart )->setParameter ( 8, $listEnd );
-		$query = $queryBuilder->getQuery ();
-		$productBaseList = $query->getArrayResult ();
-		// $productBaseList=$entityManager->getRepository ( 'HShopProduct' )->findAll ();
+				hspd.activeBeginTime,
+				hsi.name as industryName
+				FROM HShopProduct hsp
+				LEFT JOIN HShopProductDetail hspd Where hsp.id=hspd.productId and hsp.status !=:delestatus
+				LEFT JOIN HShopIndustry hsi Where hsi.id=hsp.industryId and hsp.status !=:delestatus
+				where  hsp.status !=:delestatus
+				and hsp.code like :code
+				and hspd.title like :title
+				and hsp.status like :status
+				and hsp.createTime between :createStart and :createEnd
+				and hsp.type like :type";
+			$query= $entityManager->createQuery ( $dql );
+			$query->setParameter('delestatus', SystemParameter::$productStatusdelete);
+			$query->setParameter('code', $code);
+			$query->setParameter('title', '%' . $title . '%');
+			$query->setParameter('status', $status);
+			$query->setParameter('createStart', $createStart);
+			$query->setParameter('createEnd', $createEnd);
+			$query->setParameter('type', $type);
+			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+			$paginator =new Paginator($query,true);
+			$productBaseList = $query->getArrayResult ();
+		}else {
+			$listStart = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $listStart );
+			if (empty ( $listEnd )) {
+				$listEnd = new \DateTime ( "now" );
+			} else {
+				$listEnd = \DateTime::createFromFormat ( 'Y-m-d H:i:s', $listEnd );
+			}
+			$dql = "select
+				hsp.id,
+				hsp.code,
+				hspd.title,
+				hsp.createTime,
+				hsp.modifyTime,
+				hsp.industryId,
+				hsp.status,
+				hsp.listTime,
+				hsp.type,
+				hspd.activeBeginTime,
+				hsi.name as industryName
+				FROM HShopProduct hsp
+				LEFT JOIN HShopProductDetail hspd Where hsp.id=hspd.productId and hsp.status !=:delestatus
+				LEFT JOIN HShopIndustry hsi Where hsi.id=hsp.industryId and hsp.status !=:delestatus
+				where  hsp.status !=:delestatus
+				and hsp.code like :code
+				and hspd.title like :title
+				and hsp.status like :status
+				and hsp.createTime between :createStart and :createEnd
+				and hsp.type like :type
+				and hsp.listTime between :listStart and :listEnd";
+			$query= $entityManager->createQuery ( $dql );
+			$query->setParameter('delestatus', SystemParameter::$productStatusdelete);
+			$query->setParameter('code', $code);
+			$query->setParameter('title', $title);
+			$query->setParameter('status', $status);
+			$query->setParameter('createStart', $createStart);
+			$query->setParameter('createEnd', $createEnd);
+			$query->setParameter('type', $type);
+			$query->setParameter('listStart', $listStart);
+			$query->setParameter('listEnd', $listEnd);
+			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+			$paginator =new Paginator($query,true);
+			$productBaseList = $query->getArrayResult ();
+		}
 		return $productBaseList;
 	}
 	public function findProductById($productId) {
@@ -316,33 +372,22 @@ class ProductManager {
 		) );
 		return $productDetail;
 	}
-	public function findProductProperties1($productId) {
-		global $entityManager;
-		// $productProperties=$entityManager->getRepository ( 'HShopProductProperties' )->findBy ( array (
-		// 'productId' => $productId
-		// ) );
-		// return $productProperties;
-		$dql = "SELECT
-hsp
-FROM HShopProperty hsp
-LEFT JOIN HShopPropertyValue hspv with  WHERE hsp.id=hspv.propertyId
-LEFT JOIN ( SELECT hspp FROM HShopProductProperties hspp  WHERE hspp.product_id=null) hspp WHERE hspp.productValueId=hspv.id";
-		$productBaseList = $entityManager->createQuery ( $dql )->getArrayResult ();
-		// $productBaseList=$entityManager->getRepository ( 'HShopProduct' )->findAll ();
-		return $productBaseList;
-	}
+	
 	public function findProductProperties($productId = null) {
 		global $entityManager;
 		$queryBuilder = $entityManager->createQueryBuilder ();
-		$queryBuilder->select ( array (
-				'
+		$queryBuilder->select ( array ('
 				hspp.id,
 				hspp.productId,
 				hspp.propertyId,
 				hspp.propertyValueId,
 				hspp.propertyValue,
 				hsp.editType' 
-		) )->from ( 'HShopProductProperties', 'hspp' )->leftJoin ( 'HShopProperty', 'hsp', 'WITH', 'hsp.id=hspp.propertyId' )->andWhere ( $queryBuilder->expr ()->eq ( 'hspp.productId', '?1' ) )->orderBy ( 'hsp.id', 'desc' )->setParameter ( 1, $productId );
+		) )
+		->from ( 'HShopProductProperties', 'hspp' )
+		->leftJoin ( 'HShopProperty', 'hsp', 'WITH', 'hsp.id=hspp.propertyId' )
+		->andWhere ( $queryBuilder->expr ()->eq ( 'hspp.productId', '?1' ) )
+		->orderBy ( 'hsp.id', 'desc' )->setParameter ( 1, $productId );
 		$query = $queryBuilder->getQuery ();
 		$result = $query->getArrayResult ();
 		return $result;
