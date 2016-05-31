@@ -103,7 +103,7 @@ class UserManager {
 				->setParameter ( 5, $useremail )
 				->setParameter ( 6, $type );
 		$query = $queryBuilder->getQuery ();
-		$query->setFirstResult(empty($startResult)? 1:$startResult);
+		$query->setFirstResult(empty($startResult)? 0:$startResult);
 		$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
 		$paginator =new Paginator($query,true);
 		$results = $query->getResult ();

@@ -91,7 +91,7 @@ class ArchiveManager {
 			->orderBy ( 'hah.id', 'desc' )
 			->setParameter ( 1, 3 );
 			$query = $queryBuilder->getQuery ();
-			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setFirstResult(empty($startResult)? 0:$startResult);
 			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
 			$paginator =new Paginator($query,true);
 			$results = $query->getResult ();
@@ -123,6 +123,9 @@ class ArchiveManager {
  		->setParameter ( 4, $createStart )
  		->setParameter ( 5, $createEnd );
 		$query = $queryBuilder->getQuery ();
+		$query->setFirstResult(empty($startResult)? 0:$startResult);
+		$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
+		$paginator =new Paginator($query,true);
 		$results = $query->getResult ();
 		return $results;
 	}

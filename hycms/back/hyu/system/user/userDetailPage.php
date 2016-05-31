@@ -66,7 +66,7 @@ if (isset ( $_GET ["userId"] ) || isset ( $_GET ["pageType"] )) {
 <input value="userDetailSave" name="saveType" style="display:none;">
 <input value="'.$userDetail->getId().'" name="userId" style="display:none;">
 <td><button type="submit" id="userDetailSave" class="buttonsave">保存</button></td>
-<td><a href="' . $pagebase . 'hyu/system/"><button type="button" class="buttonback">返回</button></a></td>
+<td><a href="' . $pagebase . 'hyu/system/user/"><button type="button" class="buttonback">返回</button></a></td>
 </tr>
 </table>
 <span class="resultMessage"></span>
@@ -116,7 +116,7 @@ if (isset ( $_GET ["userId"] ) || isset ( $_GET ["pageType"] )) {
 <input value="userDetailSave" name="saveType" style="display:none;">
 <input value="" name="userId" style="display:none;">
 <td><button type="submit" id="userDetailSave" class="buttonsave">保存</button></td>
-<td><button type="button" class="buttonback"><a href="' . $pagebase . 'hyu/system/">返回</a></button></td>
+<td><button type="button" class="buttonback"><a href="' . $pagebase . 'hyu/system/user/">返回</a></button></td>
 </tr>
 </table>
 <span class="resultMessage"></span>
@@ -147,10 +147,10 @@ if (isset ( $_GET ["userId"] ) || isset ( $_GET ["pageType"] )) {
 </form>';
 		} elseif ($operteType == 'userstatus') {
 			$result=$userController->changeUserStatus($userId, $_GET['operstatus']);
-			header('location:'.$pagebase.'hyu/system/');
+			header('location:'.$pagebase.'hyu/system/user/');
 			exit ();
 		} else{
-			header('location:'.$pagebase.'hyu/system/');
+			header('location:'.$pagebase.'hyu/system/user/');
 			exit ();
 		}
 	}

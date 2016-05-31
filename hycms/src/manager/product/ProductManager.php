@@ -260,7 +260,7 @@ class ProductManager {
 				LEFT JOIN HShopIndustry hsi Where hsi.id=hsp.industryId and hsp.status !=:delestatus
 				where  hsp.status !=:delestatus ";
 		$query= $entityManager->createQuery ( $dql );
-		$query->setFirstResult(empty($startResult)? 1:$startResult);
+		$query->setFirstResult(empty($startResult)? 0:$startResult);
 		$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
 		$paginator =new Paginator($query,true);
 		$query->setParameter('delestatus', SystemParameter::$productStatusdelete);
@@ -310,7 +310,7 @@ class ProductManager {
 			$query->setParameter('createStart', $createStart);
 			$query->setParameter('createEnd', $createEnd);
 			$query->setParameter('type', $type);
-			$query->setFirstResult(empty($startResult)? 1:$startResult);
+			$query->setFirstResult(empty($startResult)? 0:$startResult);
 			$query->setMaxResults(empty($resultNum)? (SystemParameter::$recordOfEveryPage):$resultNum);
 			$paginator =new Paginator($query,true);
 			$productBaseList = $query->getArrayResult ();

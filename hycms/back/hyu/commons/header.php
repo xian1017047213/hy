@@ -18,7 +18,7 @@ $userRows=$userController->getUserList($_SESSION['loginname']);
 	<li><a href="<?php echo $pagebase;?>hyu/content" id="content">内容管理</a></li>
 	<li><a href="javascript:void(0);" id="member">会员管理</a></li>
 	<li><a href="<?php echo $pagebase;?>hyu/operate" id="operate">运营管理</a></li>
-	<li><a href="<?php echo $pagebase;?>hyu/system" id="system">系统管理</a></li>
+	<li><a href="<?php echo $pagebase;?>hyu/system/user" id="system">系统管理</a></li>
 	</ul>
 	</div>
 	<div class="u-d">

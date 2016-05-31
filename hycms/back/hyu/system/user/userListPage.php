@@ -2,11 +2,11 @@
 use hybase\Controller\UserController;
 use hybase\Tools\SystemParameter;
 use hybase\Tools\PageCalculate;
-
-require_once __DIR__."/../../../../src/controller/system/UserController.php";
-require_once __DIR__ . "/../../../../src/manager/tools/PageCalculate.php";
+require_once __DIR__ . '/../../../../src/controller/system/UserController.php';
+require_once __DIR__ . '/../../../../src/controller/system/UserController.php';
+require_once __DIR__ . '/../../../../src/manager/tools/PageCalculate.php';
 require_once __DIR__ . '/../../../../src/manager/tools/SystemParameter.php';
-include_once __DIR__.'/../../user/loginveri.php';
+include_once __DIR__ . '/../../user/loginveri.php';
 static $oneGrade='authmanager';
 static $secondGrade='usermanager';
 $recordNum=null;
@@ -32,13 +32,13 @@ if (isset ( $_GET ['operPage'] )) {
 <div class="conright">
 <div class="conheader">
 <span>用户管理</span>
-<a style="float: right;text-decoration: none;margin-top: 5px;" href=" <?php echo $pagebase.'hyu/system/?pageType=userdetail';?>" >
+<a style="float: right;text-decoration: none;margin-top: 5px;" href=" <?php echo $pagebase.'hyu/system/user/?pageType=userdetail';?>" >
 <label class="listButton" >新建用户</label>
 </a>
 </div>
 <div class="c-r-c">
 <div class="ui-block-content ui-block-content-lb">
-<form action="<?php echo $pagebase ?>hyu/system/" method="get" id="usersearch">
+<form action="<?php echo $pagebase ?>hyu/system/user" method="get" id="usersearch">
 <input id="searchuser" name="searchuser" style="display: none;" value="searchuser">
 <table>
 	<tbody>
@@ -159,9 +159,9 @@ if (isset ( $_GET ['operPage'] )) {
 					<div class="ui-poplist">
 					<div class="current">修改</div>
 						<ul style="z-index: 16;">
-							<li><a href="'.$pagebase.'hyu/system/?pageType=userdetail&userId='. $userRow->getId ().'">修改</a></li>
-							<li><a href="'.$pagebase.'hyu/system/?pageType=userpwd&userId='. $userRow->getId ().'">重置密码</a></li>
-							<li><a href="'.$pagebase.'hyu/system/?pageType=userstatus&operstatus='.$operaStatus.'&userId='. $userRow->getId ().'">'.$operaUserStatus.'</a></li>
+							<li><a href="'.$pagebase.'hyu/system/user/?pageType=userdetail&userId='. $userRow->getId ().'">修改</a></li>
+							<li><a href="'.$pagebase.'hyu/system/user/?pageType=userpwd&userId='. $userRow->getId ().'">重置密码</a></li>
+							<li><a href="'.$pagebase.'hyu/system/user/?pageType=userstatus&operstatus='.$operaStatus.'&userId='. $userRow->getId ().'">'.$operaUserStatus.'</a></li>
 						</ul>
 					</div></td>';
 					$userTable = $userTable . '</tr>';
